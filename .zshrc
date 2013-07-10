@@ -35,9 +35,10 @@ source $ZSH/oh-my-zsh.sh
 unsetopt correct
 
 # Customize to your needs...
-export PATH=/usr/local/git/bin:/usr/local/bin:/usr/bin:/bin:~/bin:/usr/sbin:/usr/local/sbin:/sbin:/usr/X11/bin:/usr/local:/usr/local/texlive/2011/bin/x86_64-darwin #:/Users/linuspettersson/Skolan/Femman/Exjobb/Thesis/sonar-runner-2.0/bin
+export PATH=/usr/local/git/bin:/usr/local/bin:/usr/bin:/bin:~/bin:/usr/sbin:/usr/local/sbin:/sbin:/usr/X11/bin:/usr/local:/usr/local/texlive/2011/bin/x86_64-darwin
 
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
+export RBENV_ROOT=/usr/local/var/rbenv
 
 eval "$(rbenv init -)"
 

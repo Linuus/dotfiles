@@ -52,6 +52,8 @@ set rnu             " Relative line numbers
 
 set laststatus=2
 
+set bs=2
+
 noremap <c-w>j <c-w>h
 noremap <c-w>k <c-w>j
 noremap <c-w>l <c-w>k

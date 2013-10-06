@@ -15,7 +15,8 @@
 " original repos on github
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-rails'
-"Bundle 'tpope/vim-bundler'
+Bundle 'tpope/vim-bundler'
+Bundle 'tpope/vim-unimpaired'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'Lokaltog/vim-powerline'

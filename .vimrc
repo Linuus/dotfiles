@@ -1,5 +1,4 @@
 
-
  set nocompatible               " be iMproved
  filetype off                   " required!
 
@@ -25,6 +24,8 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'godlygeek/tabular'
 Bundle 'benmills/vimux'
 Bundle 'jgdavey/vim-turbux'
+Bundle 'kana/vim-textobj-user'
+Bundle 'nelstrom/vim-textobj-rubyblock'
 
 set encoding=utf8
 let mapleader=","
@@ -81,6 +82,8 @@ noremap j h
 map § :NERDTreeToggle<CR>
 
 filetype plugin indent on     " required!
+runtime macros/matchit.vim
+
 "
 " Brief help
 " :BundleList          - list configured bundles

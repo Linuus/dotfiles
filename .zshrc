@@ -13,6 +13,7 @@ ZSH_THEME="linus"
 
 # Aliases
 alias be='bundle exec'
+alias rdm='be rake db:migrate'
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"

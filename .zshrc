@@ -11,6 +11,9 @@ ZSH_THEME="linus"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Aliases
+alias be='bundle exec'
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 

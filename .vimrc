@@ -26,6 +26,7 @@ Bundle 'benmills/vimux'
 Bundle 'jgdavey/vim-turbux'
 Bundle 'kana/vim-textobj-user'
 Bundle 'nelstrom/vim-textobj-rubyblock'
+Bundle 'mileszs/ack.vim'
 
 set encoding=utf8
 let mapleader=","

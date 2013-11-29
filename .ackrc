@@ -1,0 +1,6 @@
+--type-set
+ignorables=.log,.tmp,.pdf
+--ignore-dir=vendor
+--ignore-dir=log
+--ignore-dir=tmp
+--ignore-dir=doc

@@ -27,6 +27,7 @@ Bundle 'jgdavey/vim-turbux'
 Bundle 'kana/vim-textobj-user'
 Bundle 'nelstrom/vim-textobj-rubyblock'
 Bundle 'mileszs/ack.vim'
+Bundle 'scrooloose/nerdcommenter'
 
 set encoding=utf8
 let mapleader=","

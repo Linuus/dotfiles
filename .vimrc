@@ -12,9 +12,9 @@ Bundle 'gmarik/vundle'
 " My Bundles here:
 "
 " original repos on github
-" Bundle 'tpope/vim-dispatch'
+Bundle 'tpope/vim-dispatch'
 Bundle 'Lokaltog/vim-powerline'
-Bundle 'benmills/vimux'
+" Bundle 'benmills/vimux'
 Bundle 'godlygeek/tabular'
 Bundle 'jgdavey/vim-turbux'
 Bundle 'kana/vim-textobj-user'
@@ -70,7 +70,7 @@ noremap <c-w>; <c-w>l
 
 set guifont=Menlo\ for\ Powerline
 
-let g:VimuxUseNearestPane = 1
+" let g:VimuxUseNearestPane = 1
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.

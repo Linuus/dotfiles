@@ -1,13 +1,13 @@
 
- set nocompatible               " be iMproved
- filetype off                   " required!
+set nocompatible               " be iMproved
+filetype off                   " required!
 
- set rtp+=~/.vim/bundle/vundle/
- call vundle#rc()
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
- " let Vundle manage Vundle
- " required! 
- Bundle 'gmarik/vundle'
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
 
 " My Bundles here:
 "
@@ -28,6 +28,8 @@ Bundle 'kana/vim-textobj-user'
 Bundle 'nelstrom/vim-textobj-rubyblock'
 Bundle 'mileszs/ack.vim'
 Bundle 'tomtom/tcomment_vim'
+Bundle 'tpope/vim-endwise'
+Bundle 'tpope/vim-surround'
 
 set encoding=utf8
 let mapleader=","
@@ -63,6 +65,7 @@ noremap <c-w>j <c-w>h
 noremap <c-w>k <c-w>j
 noremap <c-w>l <c-w>k
 noremap <c-w>ö <c-w>l
+noremap <c-w>; <c-w>l
 
 set guifont=Menlo\ for\ Powerline
 
@@ -77,6 +80,7 @@ if !exists(":DiffOrig")
 endif
 
 noremap ö l
+noremap ; l
 noremap l k
 noremap k j
 noremap j h

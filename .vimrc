@@ -30,6 +30,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'vim-ruby/vim-ruby'
 
 set encoding=utf8
@@ -91,6 +92,9 @@ map § :NERDTreeToggle<CR>
 filetype plugin indent on     " required!
 runtime macros/matchit.vim
 
+let g:ycm_collect_identifiers_from_tags_files = 1
+
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " Define a command to make it easier to use
 command! -nargs=+ QFDo call QFDo(<q-args>)

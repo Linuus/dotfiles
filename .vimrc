@@ -20,8 +20,8 @@ Bundle 'jgdavey/vim-turbux'
 Bundle 'kana/vim-textobj-user'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'kien/ctrlp.vim'
-" Bundle 'mileszs/ack.vim'
-Bundle 'Linuus/ack.vim'
+Bundle 'mileszs/ack.vim'
+" Bundle 'Linuus/ack.vim'
 Bundle 'nelstrom/vim-textobj-rubyblock'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tomtom/tcomment_vim'
@@ -46,6 +46,9 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 let g:Powerline_symbols = 'fancy' " Fancy symbols for Powerline
+
+set listchars=tab:▸\ ,eol:➟
+
 
 set tabstop=2       " The width of a TAB is set to 4.
                     " Still it is a \t. It is just that
@@ -81,7 +84,7 @@ set guifont=Menlo\ for\ Powerline
 " Only define it when not defined already.
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-		  \ | wincmd p | diffthis
+      \ | wincmd p | diffthis
 endif
 
 noremap ö l

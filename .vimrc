@@ -1,38 +1,50 @@
+ if has('vim_starting')
+   set nocompatible               " Be iMproved
 
-set nocompatible               " be iMproved
-filetype off                   " required!
+   " Required:
+   set runtimepath+=~/.vim/bundle/neobundle.vim/
+ endif
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+ " Required:
+ call neobundle#begin(expand('~/.vim/bundle/'))
 
-" let Vundle manage Vundle
-" required! 
-Bundle 'gmarik/vundle'
+ " Let NeoBundle manage NeoBundle
+ " Required:
+ NeoBundleFetch 'Shougo/neobundle.vim'
 
 " My Bundles here:
 "
 " original repos on github
-Bundle 'tpope/vim-dispatch'
-Bundle 'Lokaltog/vim-powerline'
-" Bundle 'benmills/vimux'
-Bundle 'godlygeek/tabular'
-Bundle 'jgdavey/vim-turbux'
-Bundle 'kana/vim-textobj-user'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'kien/ctrlp.vim'
-Bundle 'mileszs/ack.vim'
-" Bundle 'Linuus/ack.vim'
-Bundle 'nelstrom/vim-textobj-rubyblock'
-Bundle 'scrooloose/nerdtree'
-Bundle 'tomtom/tcomment_vim'
-Bundle 'tpope/vim-bundler'
-Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'vim-ruby/vim-ruby'
+NeoBundle 'tpope/vim-dispatch'
+NeoBundle 'Lokaltog/vim-powerline'
+NeoBundle 'godlygeek/tabular'
+NeoBundle 'jgdavey/vim-turbux'
+NeoBundle 'kana/vim-textobj-user'
+NeoBundle 'kchmck/vim-coffee-script'
+" NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'mileszs/ack.vim'
+NeoBundle 'nelstrom/vim-textobj-rubyblock'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'tpope/vim-bundler'
+NeoBundle 'tpope/vim-endwise'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-rails'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-unimpaired'
+NeoBundle 'Valloric/YouCompleteMe'
+NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'Shougo/vimproc', {
+      \ 'build' : {
+      \     'windows' : 'make -f make_mingw32.mak',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
+
+call neobundle#end()
 
 set encoding=utf8
 let mapleader=","
@@ -131,15 +143,4 @@ function! QFDo(command)
     endfor
 endfunction
 
-
-
-
-"
-" Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install(update) bundles
-" :BundleSearch(!) foo - search(or refresh cache first) for foo
-" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
-"
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle command are not allowed..
+NeoBundleCheck

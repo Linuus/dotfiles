@@ -46,6 +46,9 @@ NeoBundle 'Shougo/vimproc', {
 
 call neobundle#end()
 
+""""""""""""""""""""""""""""""""""""""""
+" GENERAL CONFIG
+""""""""""""""""""""""""""""""""""""""""
 set encoding=utf8
 let mapleader=","
 
@@ -57,17 +60,24 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
 endif
 
+filetype plugin indent on     " required!
+runtime macros/matchit.vim
+
 let g:Powerline_symbols = 'fancy' " Fancy symbols for Powerline
+
+let g:ycm_collect_identifiers_from_tags_files = 1
+
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 set listchars=tab:▸\ ,eol:➟
 
 
-set tabstop=2       " The width of a TAB is set to 4.
+set tabstop=2       " The width of a TAB is set to 2.
                     " Still it is a \t. It is just that
                     " Vim will interpret it to be having
-                    " a width of 4.
+                    " a width of 2.
 
-set shiftwidth=2    " Indents will have a width of 4
+set shiftwidth=2    " Indents will have a width of 2
 
 set softtabstop=2   " Sets the number of columns for a TAB
 
@@ -81,15 +91,47 @@ set bs=2
 
 set incsearch
 
-noremap <c-w>j <c-w>h
-noremap <c-w>k <c-w>j
-noremap <c-w>l <c-w>k
-noremap <c-w>ö <c-w>l
-noremap <c-w>; <c-w>l
-
 set guifont=Menlo\ for\ Powerline
 
-" let g:VimuxUseNearestPane = 1
+""""""""""""""""""""""""""""""""""""""""
+" GENERAL KEY MAPPINGS
+""""""""""""""""""""""""""""""""""""""""
+map § :NERDTreeToggle<CR>
+
+" noremap <c-w>j <c-w>h
+" noremap <c-w>k <c-w>j
+" noremap <c-w>l <c-w>k
+" noremap <c-w>ö <c-w>l
+" noremap <c-w>; <c-w>l
+
+" noremap ö l
+" noremap ; l
+" noremap l k
+" noremap k j
+" noremap j h
+
+""""""""""""""""""""""""""""""""""""""""
+" UNITE CONFIG AND MAPPINGS
+""""""""""""""""""""""""""""""""""""""""
+autocmd FileType unite match none
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+nnoremap <C-p> :<C-u>Unite -buffer-name=files -start-insert file_rec/async:!<cr>
+nnoremap <leader>/ :Unite grep:.<cr>
+
+let g:unite_force_overwrite_statusline = 0
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
+endif
+
+autocmd FileType unite call s:unite_my_settings()
+function! s:unite_my_settings()
+  imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
+  imap <silent><buffer><expr> <C-h> unite#do_action('split')
+  nmap <buffer> <ESC> <Plug>(unite_exit)
+endfunction
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
@@ -98,21 +140,6 @@ if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
       \ | wincmd p | diffthis
 endif
-
-noremap ö l
-noremap ; l
-noremap l k
-noremap k j
-noremap j h
-
-map § :NERDTreeToggle<CR>
-
-filetype plugin indent on     " required!
-runtime macros/matchit.vim
-
-let g:ycm_collect_identifiers_from_tags_files = 1
-
-let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " Define a command to make it easier to use
 command! -nargs=+ QFDo call QFDo(<q-args>)

@@ -15,6 +15,8 @@
 " My Bundles here:
 "
 " original repos on github
+NeoBundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'godlygeek/tabular'
@@ -57,7 +59,10 @@ let mapleader="\\"
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
   syntax on
-  colorscheme molokai
+  set background=dark
+  " colorscheme solarized
+  " colorscheme molokai
+  colorscheme tomorrow-night-eighties
   set hlsearch
 endif
 
@@ -110,17 +115,18 @@ let g:unite_matcher_fuzzy_max_input_length = 1/0 " infinity
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#profile('ignorecase', 'ignorecase', 1)
-nnoremap [unite]f :Unite -buffer-name=files -profile-name=ignorecase -start-insert file_rec/async<cr>
+call unite#custom#source('grep', 'matchers', 'matcher_fuzzy')
+nnoremap [unite]f :Unite -buffer-name=files -profile-name=ignorecase -start-insert file_rec/async:!<cr>
 nnoremap [unite]g :Unite -buffer-name=search -profile-name=ignorecase grep:.<cr>
 
 " Files in rails
-nnoremap [unite]rm :Unite -start-insert -profile-name=ignorecase -input=app/models/ file_rec/async<cr>
-nnoremap [unite]rv :Unite -start-insert -profile-name=ignorecase -input=app/views/ file_rec/async<cr>
-nnoremap [unite]ra :Unite -start-insert -profile-name=ignorecase -input=app/assets/ file_rec/async<cr>
-nnoremap [unite]rs :Unite -start-insert -profile-name=ignorecase -input=spec/ file_rec/async<cr>
+nnoremap [unite]rm :Unite -start-insert -profile-name=ignorecase -input=app/models/ file_rec/async:!<cr>
+nnoremap [unite]rv :Unite -start-insert -profile-name=ignorecase -input=app/views/ file_rec/async:!<cr>
+nnoremap [unite]ra :Unite -start-insert -profile-name=ignorecase -input=app/assets/ file_rec/async:!<cr>
+nnoremap [unite]rs :Unite -start-insert -profile-name=ignorecase -input=spec/ file_rec/async:!<cr>
 
 " Content
-nnoremap [unite]o :Unite -start-insert -auto-preview outline<cr>
+nnoremap [unite]o :Unite -profile-name=ignorecase -start-insert -auto-resize -no-split -auto-preview outline<cr>
 nnoremap [unite]t :Unite -auto-preview -start-insert tag<cr>
 
 let g:unite_force_overwrite_statusline = 0

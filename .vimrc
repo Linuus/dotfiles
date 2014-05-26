@@ -21,11 +21,12 @@ NeoBundle 'godlygeek/tabular'
 NeoBundle 'jgdavey/vim-turbux'
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'kchmck/vim-coffee-script'
-" NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'mileszs/ack.vim'
 NeoBundle 'nelstrom/vim-textobj-rubyblock'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/unite-outline'
+NeoBundle 'tsukkee/unite-tag'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'tpope/vim-bundler'
 NeoBundle 'tpope/vim-endwise'
@@ -50,7 +51,7 @@ call neobundle#end()
 " GENERAL CONFIG
 """"""""""""""""""""""""""""""""""""""""
 set encoding=utf8
-let mapleader=","
+let mapleader="\\"
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -98,38 +99,41 @@ set guifont=Menlo\ for\ Powerline
 """"""""""""""""""""""""""""""""""""""""
 map § :NERDTreeToggle<CR>
 
-" noremap <c-w>j <c-w>h
-" noremap <c-w>k <c-w>j
-" noremap <c-w>l <c-w>k
-" noremap <c-w>ö <c-w>l
-" noremap <c-w>; <c-w>l
-
-" noremap ö l
-" noremap ; l
-" noremap l k
-" noremap k j
-" noremap j h
-
 """"""""""""""""""""""""""""""""""""""""
 " UNITE CONFIG AND MAPPINGS
 """"""""""""""""""""""""""""""""""""""""
 autocmd FileType unite match none
+nnoremap [unite] <Nop>
+nmap <space> [unite]
+
+let g:unite_matcher_fuzzy_max_input_length = 1/0 " infinity
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
-nnoremap <C-p> :<C-u>Unite -buffer-name=files -start-insert file_rec/async:!<cr>
-nnoremap <leader>/ :Unite grep:.<cr>
+call unite#custom#profile('ignorecase', 'ignorecase', 1)
+nnoremap [unite]f :Unite -buffer-name=files -profile-name=ignorecase -start-insert file_rec/async<cr>
+nnoremap [unite]g :Unite -buffer-name=search -profile-name=ignorecase grep:.<cr>
+
+" Files in rails
+nnoremap [unite]rm :Unite -start-insert -profile-name=ignorecase -input=app/models/ file_rec/async<cr>
+nnoremap [unite]rv :Unite -start-insert -profile-name=ignorecase -input=app/views/ file_rec/async<cr>
+nnoremap [unite]ra :Unite -start-insert -profile-name=ignorecase -input=app/assets/ file_rec/async<cr>
+nnoremap [unite]rs :Unite -start-insert -profile-name=ignorecase -input=spec/ file_rec/async<cr>
+
+" Content
+nnoremap [unite]o :Unite -start-insert -auto-preview outline<cr>
+nnoremap [unite]t :Unite -auto-preview -start-insert tag<cr>
 
 let g:unite_force_overwrite_statusline = 0
 if executable('ag')
   let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column --hidden'
   let g:unite_source_grep_recursive_opt = ''
 endif
 
 autocmd FileType unite call s:unite_my_settings()
 function! s:unite_my_settings()
   imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
-  imap <silent><buffer><expr> <C-h> unite#do_action('split')
+  imap <silent><buffer><expr> <C-x> unite#do_action('split')
   nmap <buffer> <ESC> <Plug>(unite_exit)
 endfunction
 

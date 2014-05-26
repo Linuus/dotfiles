@@ -1,0 +1,5 @@
+log/development.log
+log/test.log
+log/newrelic_agent.log
+log/bug.log
+log/production.log

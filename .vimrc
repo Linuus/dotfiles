@@ -25,7 +25,6 @@ NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'mileszs/ack.vim'
 NeoBundle 'nelstrom/vim-textobj-rubyblock'
-NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/unite-outline'
 NeoBundle 'tsukkee/unite-tag'
@@ -102,7 +101,7 @@ set guifont=Menlo\ for\ Powerline
 """"""""""""""""""""""""""""""""""""""""
 " GENERAL KEY MAPPINGS
 """"""""""""""""""""""""""""""""""""""""
-map § :NERDTreeToggle<CR>
+" add stuff
 
 """"""""""""""""""""""""""""""""""""""""
 " UNITE CONFIG AND MAPPINGS
@@ -116,13 +115,15 @@ call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#profile('ignorecase', 'ignorecase', 1)
 call unite#custom#source('grep', 'matchers', 'matcher_fuzzy')
-nnoremap [unite]f :Unite -buffer-name=files -profile-name=ignorecase -start-insert file_rec/async:!<cr>
+nnoremap [unite]f :Unite -buffer-name=files -no-split -profile-name=ignorecase -start-insert file_rec/async:!<cr>
+nnoremap [unite]ft :Unite -buffer-name=files -no-split -profile-name=ignorecase -start-insert file<cr>
 nnoremap [unite]g :Unite -buffer-name=search -profile-name=ignorecase grep:.<cr>
 
 " Files in rails
+nnoremap [unite]ra :Unite -start-insert -profile-name=ignorecase -input=app/assets/ file_rec/async:!<cr>
+nnoremap [unite]rc :Unite -start-insert -profile-name=ignorecase -input=app/controllers/ file_rec/async:!<cr>
 nnoremap [unite]rm :Unite -start-insert -profile-name=ignorecase -input=app/models/ file_rec/async:!<cr>
 nnoremap [unite]rv :Unite -start-insert -profile-name=ignorecase -input=app/views/ file_rec/async:!<cr>
-nnoremap [unite]ra :Unite -start-insert -profile-name=ignorecase -input=app/assets/ file_rec/async:!<cr>
 nnoremap [unite]rs :Unite -start-insert -profile-name=ignorecase -input=spec/ file_rec/async:!<cr>
 
 " Content

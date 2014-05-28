@@ -115,6 +115,7 @@ call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#profile('ignorecase', 'ignorecase', 1)
 call unite#custom#source('grep', 'matchers', 'matcher_fuzzy')
+
 nnoremap [unite]f :Unite -buffer-name=files -profile-name=ignorecase -start-insert file_rec/async:!<cr>
 nnoremap [unite]e :Unite -buffer-name=files -profile-name=ignorecase -start-insert file<cr>
 nnoremap [unite]g :Unite -buffer-name=search -profile-name=ignorecase grep:.<cr>

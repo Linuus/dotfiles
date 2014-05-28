@@ -25,6 +25,7 @@ NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'mileszs/ack.vim'
 NeoBundle 'nelstrom/vim-textobj-rubyblock'
+NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/unite-outline'
 NeoBundle 'tsukkee/unite-tag'
@@ -35,7 +36,6 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
@@ -70,7 +70,10 @@ runtime macros/matchit.vim
 
 let g:Powerline_symbols = 'fancy' " Fancy symbols for Powerline
 
-let g:ycm_collect_identifiers_from_tags_files = 1
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
@@ -115,6 +118,7 @@ call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#profile('ignorecase', 'ignorecase', 1)
 call unite#custom#source('grep', 'matchers', 'matcher_fuzzy')
+call unite#custom_source('file_rec/async,file_mru,file,buffer,grep', 'max_candidates', 0)
 
 nnoremap [unite]f :Unite -buffer-name=files -profile-name=ignorecase -start-insert file_rec/async:!<cr>
 nnoremap [unite]e :Unite -buffer-name=files -profile-name=ignorecase -start-insert file<cr>

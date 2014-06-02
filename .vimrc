@@ -35,7 +35,6 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {

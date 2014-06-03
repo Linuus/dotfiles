@@ -59,8 +59,6 @@ let mapleader="\\"
 if &t_Co > 2 || has("gui_running")
   syntax on
   set background=dark
-  " colorscheme solarized
-  " colorscheme molokai
   colorscheme tomorrow-night-eighties
   set hlsearch
 endif
@@ -78,7 +76,6 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
 set listchars=tab:▸\ ,eol:➟
-
 
 set tabstop=2       " The width of a TAB is set to 2.
                     " Still it is a \t. It is just that
@@ -98,6 +95,8 @@ set laststatus=2
 set bs=2
 
 set incsearch
+set ignorecase
+set smartcase
 
 set guifont=Menlo\ for\ Powerline
 

@@ -147,6 +147,8 @@ if executable('ag')
   let g:unite_source_rec_async_command = 'ag --nogroup --nocolor --column --hidden ' .
                                        \ '--ignore ".git" ' .
                                        \ '--ignore "app/assets/fonts" ' .
+                                       \ '--ignore "tmp" ' .
+                                       \ '--ignore "log" ' .
                                        \ '--ignore "app/assets/images" ' . 
                                        \ '--ignore "public/uploads" -g ""'
 

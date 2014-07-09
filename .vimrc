@@ -120,12 +120,6 @@ nmap <space> [unite]
 
 let g:unite_matcher_fuzzy_max_input_length = 1/0 " infinity
 let g:unite_source_rec_max_cache_files = 0
-let g:unite_source_rec_async_command = 'ag --nogroup --nocolor --column --hidden ' .
-                                     \ '--ignore ".git" ' .
-                                     \ '--ignore "app/assets/fonts" ' .
-                                     \ '--ignore "app/assets/images" ' . 
-                                     \ '--ignore "public/uploads" -g ""'
-
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#profile('ignorecase', 'ignorecase', 1)
@@ -150,6 +144,12 @@ nnoremap [unite]t :Unite -auto-preview -start-insert tag<cr>
 
 let g:unite_force_overwrite_statusline = 0
 if executable('ag')
+  let g:unite_source_rec_async_command = 'ag --nogroup --nocolor --column --hidden ' .
+                                       \ '--ignore ".git" ' .
+                                       \ '--ignore "app/assets/fonts" ' .
+                                       \ '--ignore "app/assets/images" ' . 
+                                       \ '--ignore "public/uploads" -g ""'
+
   let g:unite_source_grep_command = 'ag'
   let g:unite_source_grep_default_opts = '--nogroup --nocolor --column --hidden'
   let g:unite_source_grep_recursive_opt = ''

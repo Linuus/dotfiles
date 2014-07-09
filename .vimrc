@@ -98,6 +98,12 @@ set incsearch
 set ignorecase
 set smartcase
 
+set undofile
+
+set undodir=~/.tmp
+set backupdir=~/.tmp
+set directory=~/.tmp " Don't clutter my dirs up with swp and tmp files
+
 set guifont=Menlo\ for\ Powerline
 
 """"""""""""""""""""""""""""""""""""""""
@@ -113,11 +119,19 @@ nnoremap [unite] <Nop>
 nmap <space> [unite]
 
 let g:unite_matcher_fuzzy_max_input_length = 1/0 " infinity
+let g:unite_source_rec_max_cache_files = 0
+let g:unite_source_rec_async_command = 'ag --nogroup --nocolor --column --hidden ' .
+                                     \ '--ignore ".git" ' .
+                                     \ '--ignore "app/assets/fonts" ' .
+                                     \ '--ignore "app/assets/images" ' . 
+                                     \ '--ignore "public/uploads" -g ""'
+
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#profile('ignorecase', 'ignorecase', 1)
 call unite#custom#source('grep', 'matchers', 'matcher_fuzzy')
-call unite#custom_source('file_rec/async,file_mru,file,buffer,grep', 'max_candidates', 0)
+
+" call unite#custom#source('file_rec/async,file_mru,file,buffer,grep', 'max_candidates', 100)
 
 nnoremap [unite]f :Unite -buffer-name=files -profile-name=ignorecase -start-insert file_rec/async:!<cr>
 nnoremap [unite]e :Unite -buffer-name=files -profile-name=ignorecase -start-insert file<cr>

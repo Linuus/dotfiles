@@ -15,29 +15,31 @@
 " My Bundles here:
 "
 " original repos on github
-NeoBundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'tpope/vim-dispatch'
-NeoBundle 'Lokaltog/vim-powerline'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+NeoBundle 'edkolev/promptline.vim'
+NeoBundle 'edkolev/tmuxline.vim'
 NeoBundle 'godlygeek/tabular'
 NeoBundle 'jgdavey/vim-turbux'
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'mileszs/ack.vim'
+NeoBundle 'mustache/vim-mustache-handlebars'
 NeoBundle 'nelstrom/vim-textobj-rubyblock'
-NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/unite-outline'
-NeoBundle 'tsukkee/unite-tag'
+NeoBundle 'shougo/neocomplete.vim'
+NeoBundle 'shougo/unite-outline'
+NeoBundle 'shougo/unite.vim'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'tpope/vim-bundler'
+NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-endwise'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
+NeoBundle 'tsukkee/unite-tag'
 NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'mustache/vim-mustache-handlebars'
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
       \     'windows' : 'make -f make_mingw32.mak',
@@ -67,7 +69,15 @@ endif
 filetype plugin indent on     " required!
 runtime macros/matchit.vim
 
-let g:Powerline_symbols = 'fancy' " Fancy symbols for Powerline
+let g:airline_powerline_fonts = 1
+
+let g:promptline_preset = {
+        \'a' : [ promptline#slices#jobs(), promptline#slices#host() ],
+        \'b' : [ promptline#slices#user() ],
+        \'c' : [ promptline#slices#cwd() ],
+        \'y' : [ promptline#slices#vcs_branch() ],
+        \'z' : [ 'Ruby: $(rbenv version-name)' ],
+        \'warn' : [ promptline#slices#git_status() ]}
 
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
@@ -104,8 +114,6 @@ set undofile
 set undodir=~/.tmp
 set backupdir=~/.tmp
 set directory=~/.tmp " Don't clutter my dirs up with swp and tmp files
-
-set guifont=Menlo\ for\ Powerline
 
 """"""""""""""""""""""""""""""""""""""""
 " GENERAL KEY MAPPINGS
@@ -150,7 +158,7 @@ if executable('ag')
                                        \ '--ignore "app/assets/fonts" ' .
                                        \ '--ignore "tmp" ' .
                                        \ '--ignore "log" ' .
-                                       \ '--ignore "app/assets/images" ' . 
+                                       \ '--ignore "app/assets/images" ' .
                                        \ '--ignore "public/uploads" -g ""'
 
   let g:unite_source_grep_command = 'ag'
@@ -183,7 +191,7 @@ function! QFDo(command)
     " list of lines in buffers (easy way
     " to get unique entries)
     let buffer_numbers = {}
-    " For each entry, use the buffer number as 
+    " For each entry, use the buffer number as
     " a dictionary key (won't get repeats)
     for fixlist_entry in getqflist()
         let buffer_numbers[fixlist_entry['bufnr']] = 1

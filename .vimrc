@@ -151,6 +151,9 @@ nnoremap [unite]rs :Unite -start-insert -profile-name=ignorecase -input=spec/ fi
 nnoremap [unite]o :Unite -profile-name=ignorecase -start-insert -auto-resize -no-split -auto-preview outline<cr>
 nnoremap [unite]t :Unite -auto-preview -start-insert tag<cr>
 
+" Align ruby 1.9 hashes
+vnoremap <Leader>ah :Tabularize/\(:.*\)\@<!:\zs /l0<CR>
+
 let g:unite_force_overwrite_statusline = 0
 if executable('ag')
   let g:unite_source_rec_async_command = 'ag --nogroup --nocolor --column --hidden ' .

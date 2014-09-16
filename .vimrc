@@ -30,6 +30,7 @@ NeoBundle 'nelstrom/vim-textobj-rubyblock'
 NeoBundle 'shougo/neocomplete.vim'
 NeoBundle 'shougo/unite-outline'
 NeoBundle 'shougo/unite.vim'
+NeoBundle 'shougo/neomru.vim'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'tpope/vim-bundler'
 NeoBundle 'tpope/vim-dispatch'
@@ -134,12 +135,15 @@ call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#profile('ignorecase', 'ignorecase', 1)
 call unite#custom#source('grep', 'matchers', 'matcher_fuzzy')
+call unite#custom#source(
+      \ 'neomru/file', 'matchers',
+      \ ['matcher_project_files', 'matcher_fuzzy', 'converter_relative_word', 'converter_relative_abbr'])
 
-" call unite#custom#source('file_rec/async,file_mru,file,buffer,grep', 'max_candidates', 100)
-
-nnoremap [unite]f :Unite -buffer-name=files -profile-name=ignorecase -start-insert file_rec/async:!<cr>
+nnoremap [unite]f :Unite -buffer-name=files -profile-name=ignorecase -start-insert neomru/file file_rec/async:!<cr>
+nnoremap [unite]m :Unite -buffer-name=mru -profile-name=ignorecase -start-insert neomru/file<cr>
 nnoremap [unite]e :Unite -buffer-name=files -profile-name=ignorecase -start-insert file<cr>
 nnoremap [unite]g :Unite -buffer-name=search -profile-name=ignorecase grep:.<cr>
+nnoremap [unite]re :UniteResume<cr>
 
 " Files in rails
 nnoremap [unite]ra :Unite -start-insert -profile-name=ignorecase -input=app/assets/ file_rec/async:!<cr>

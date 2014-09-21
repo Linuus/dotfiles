@@ -102,6 +102,8 @@ set expandtab       " Expand TABs to spaces
 set rnu             " Relative line numbers
 set number
 
+set clipboard=unnamed
+
 set laststatus=2
 
 set bs=2

@@ -135,7 +135,6 @@ let g:unite_matcher_fuzzy_max_input_length = 1/0 " infinity
 let g:unite_source_rec_max_cache_files = 0
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
-call unite#custom#profile('ignorecase', 'ignorecase', 1)
 call unite#custom#source('grep', 'matchers', 'matcher_fuzzy')
 call unite#custom#source(
       \ 'neomru/file', 'matchers',

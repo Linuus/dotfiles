@@ -27,6 +27,7 @@ NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'mileszs/ack.vim'
 NeoBundle 'mustache/vim-mustache-handlebars'
 NeoBundle 'nelstrom/vim-textobj-rubyblock'
+NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'shougo/neocomplete.vim'
 NeoBundle 'shougo/unite-outline'
 NeoBundle 'shougo/unite.vim'
@@ -119,10 +120,13 @@ set undodir=~/.tmp
 set backupdir=~/.tmp
 set directory=~/.tmp " Don't clutter my dirs up with swp and tmp files
 
+let g:vim_markdown_folding_disabled=1
+
 """"""""""""""""""""""""""""""""""""""""
-" GENERAL KEY MAPPINGS
+" GENERAL KEY MAPPINGS and commands
 """"""""""""""""""""""""""""""""""""""""
-" add stuff
+
+nnoremap <Leader>n :tabedit ~/Dropbox\ (Personal)/Notes/notes.md<cr>
 
 """"""""""""""""""""""""""""""""""""""""
 " UNITE CONFIG AND MAPPINGS

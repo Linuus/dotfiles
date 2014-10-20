@@ -28,6 +28,7 @@ NeoBundle 'mileszs/ack.vim'
 NeoBundle 'mustache/vim-mustache-handlebars'
 NeoBundle 'nelstrom/vim-textobj-rubyblock'
 NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'scrooloose/syntastic'
 NeoBundle 'shougo/neocomplete.vim'
 NeoBundle 'shougo/unite-outline'
 NeoBundle 'shougo/unite.vim'
@@ -120,7 +121,12 @@ set undodir=~/.tmp
 set backupdir=~/.tmp
 set directory=~/.tmp " Don't clutter my dirs up with swp and tmp files
 
+set colorcolumn=120
+
 let g:vim_markdown_folding_disabled=1
+
+" let g:syntastic_ruby_checkers = ['rubylint', 'rubocop']
+let g:syntastic_ruby_checkers = ['rubocop']
 
 """"""""""""""""""""""""""""""""""""""""
 " GENERAL KEY MAPPINGS and commands

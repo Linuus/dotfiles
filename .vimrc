@@ -125,8 +125,8 @@ set colorcolumn=120
 
 let g:vim_markdown_folding_disabled=1
 
-" let g:syntastic_ruby_checkers = ['rubylint', 'rubocop']
 let g:syntastic_ruby_checkers = ['rubocop']
+let g:syntastic_always_populate_loc_list=1
 
 """"""""""""""""""""""""""""""""""""""""
 " GENERAL KEY MAPPINGS and commands

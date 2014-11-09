@@ -33,6 +33,8 @@ NeoBundle 'shougo/neocomplete.vim'
 NeoBundle 'shougo/unite-outline'
 NeoBundle 'shougo/unite.vim'
 NeoBundle 'shougo/neomru.vim'
+NeoBundle 'shougo/neosnippet'
+NeoBundle 'shougo/neosnippet-snippets'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'tpope/vim-bundler'
 NeoBundle 'tpope/vim-dispatch'
@@ -131,8 +133,25 @@ let g:syntastic_always_populate_loc_list=1
 """"""""""""""""""""""""""""""""""""""""
 " GENERAL KEY MAPPINGS and commands
 """"""""""""""""""""""""""""""""""""""""
-
 nnoremap <Leader>n :tabedit ~/Dropbox\ (Personal)/Notes/notes.md<cr>
+
+" Neosnippet key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
 
 """"""""""""""""""""""""""""""""""""""""
 " UNITE CONFIG AND MAPPINGS

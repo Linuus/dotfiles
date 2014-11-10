@@ -131,7 +131,6 @@ let g:syntastic_always_populate_loc_list=1
 """"""""""""""""""""""""""""""""""""""""
 " GENERAL KEY MAPPINGS and commands
 """"""""""""""""""""""""""""""""""""""""
-
 nnoremap <Leader>n :tabedit ~/Dropbox\ (Personal)/Notes/notes.md<cr>
 
 """"""""""""""""""""""""""""""""""""""""

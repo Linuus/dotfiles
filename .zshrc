@@ -58,7 +58,7 @@ export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
 eval "$(rbenv init -)"
 
 # Alias hub to git
-eval "$(hub alias -s)"
+# eval "$(hub alias -s)"
 
 export EDITOR='vim'
 

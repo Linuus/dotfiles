@@ -15,6 +15,7 @@
 " My Bundles here:
 "
 " original repos on github
+NeoBundle 'alexbel/vim-rubygems'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 NeoBundle 'edkolev/promptline.vim'
@@ -23,6 +24,7 @@ NeoBundle 'godlygeek/tabular'
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'mileszs/ack.vim'
+NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mustache/vim-mustache-handlebars'
 NeoBundle 'nelstrom/vim-textobj-rubyblock'
 NeoBundle 'plasticboy/vim-markdown'

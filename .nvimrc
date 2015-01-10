@@ -64,6 +64,7 @@ let mapleader="\\"
 if &t_Co > 2 || has("gui_running")
   syntax on
   set background=dark
+  " colorscheme tomorrow-night-eighties
   colorscheme tomorrow-night-eighties
   set hlsearch
 endif
@@ -91,24 +92,15 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 
 set listchars=tab:▸\ ,eol:➟
 
-set tabstop=2       " The width of a TAB is set to 2.
-                    " Still it is a \t. It is just that
-                    " Vim will interpret it to be having
-                    " a width of 2.
-
-set shiftwidth=2    " Indents will have a width of 2
-
-set softtabstop=2   " Sets the number of columns for a TAB
-
-set expandtab       " Expand TABs to spaces
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
 
 set rnu             " Relative line numbers
 set number
-
 set clipboard+=unnamedplus
-
 set laststatus=2
-
 set bs=2
 
 set incsearch
@@ -116,10 +108,9 @@ set ignorecase
 set smartcase
 
 set undofile
-
 set undodir=~/.tmp
 set backupdir=~/.tmp
-set directory=~/.tmp " Don't clutter my dirs up with swp and tmp files
+set directory=~/.tmp
 
 set colorcolumn=120
 
@@ -131,6 +122,8 @@ autocmd BufWritePost *.py,*.js,*.rb Neomake
 " GENERAL KEY MAPPINGS and commands
 """"""""""""""""""""""""""""""""""""""""
 nnoremap <Leader>n :tabedit ~/Dropbox\ (Personal)/Notes/notes.md<cr>
+
+noremap <C-l> :nohlsearch<CR>
 
 " Neosnippet key-mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)

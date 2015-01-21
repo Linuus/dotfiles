@@ -15,7 +15,8 @@
 " My Bundles here:
 "
 " original repos on github
-NeoBundle 'bling/vim-airline'
+NeoBundle 'alexbel/vim-rubygems'
+NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 NeoBundle 'edkolev/promptline.vim'
 NeoBundle 'edkolev/tmuxline.vim'
@@ -23,6 +24,7 @@ NeoBundle 'godlygeek/tabular'
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'mileszs/ack.vim'
+NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mustache/vim-mustache-handlebars'
 NeoBundle 'nelstrom/vim-textobj-rubyblock'
 NeoBundle 'plasticboy/vim-markdown'
@@ -64,15 +66,12 @@ let mapleader="\\"
 if &t_Co > 2 || has("gui_running")
   syntax on
   set background=dark
-  " colorscheme tomorrow-night-eighties
   colorscheme tomorrow-night-eighties
   set hlsearch
 endif
 
 filetype plugin indent on     " required!
 runtime macros/matchit.vim
-
-let g:airline_powerline_fonts = 1
 
 let g:promptline_preset = {
         \'a' : [ promptline#slices#jobs(), promptline#slices#host() ],
@@ -113,6 +112,8 @@ set backupdir=~/.tmp
 set directory=~/.tmp
 
 set colorcolumn=120
+set noshowmode
+set cursorline
 
 let g:vim_markdown_folding_disabled=1
 
@@ -124,6 +125,9 @@ autocmd BufWritePost *.py,*.js,*.rb Neomake
 nnoremap <Leader>n :tabedit ~/Dropbox\ (Personal)/Notes/notes.md<cr>
 
 noremap <C-l> :nohlsearch<CR>
+
+" Align ruby 1.9 hashes
+vnoremap <Leader>ah :Tabularize/\(:.*\)\@<!:\zs /l0<CR>
 
 " Neosnippet key-mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -142,6 +146,63 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
+
+""""""""""""""""""""""""""""""""""""""""
+" LIGHTLINE CONFIG
+""""""""""""""""""""""""""""""""""""""""
+let g:lightline = {
+      \ 'colorscheme': 'Tomorrow_Night_Eighties',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
+      \   'right': [ ['lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \ },
+      \ 'component_function': {
+      \   'fugitive': 'MyFugitive',
+      \   'readonly': 'MyReadonly',
+      \   'modified': 'MyModified',
+      \   'filename': 'MyFilename'
+      \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+      \ }
+
+function! MyModified()
+  if &filetype == "help"
+    return ""
+  elseif &modified
+    return "+"
+  elseif &modifiable
+    return ""
+  else
+    return ""
+  endif
+endfunction
+
+function! MyReadonly()
+  if &filetype == "help"
+    return ""
+  elseif &readonly
+    return "⭤"
+  else
+    return ""
+  endif
+endfunction
+
+function! MyFilename()
+  let fname = expand('%:t')
+  return &ft == 'unite' ? unite#get_status_string() :
+        \ ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+        \ ('' != fname ? fname : '[No Name]') .
+        \ ('' != MyModified() ? ' ' . MyModified() : '')
+endfunction
+
+function! MyFugitive()
+  if exists("*fugitive#head")
+    let _ = fugitive#head()
+    return strlen(_) ? '⭠ '._ : ''
+  endif
+  return ''
+endfunction
 
 """"""""""""""""""""""""""""""""""""""""
 " UNITE CONFIG AND MAPPINGS
@@ -175,9 +236,6 @@ nnoremap [unite]rs :Unite -start-insert -profile-name=ignorecase -input=spec/ fi
 " Content
 nnoremap [unite]o :Unite -profile-name=ignorecase -start-insert -auto-resize -no-split -auto-preview outline<cr>
 nnoremap [unite]t :Unite -auto-preview -start-insert tag<cr>
-
-" Align ruby 1.9 hashes
-vnoremap <Leader>ah :Tabularize/\(:.*\)\@<!:\zs /l0<CR>
 
 let g:unite_force_overwrite_statusline = 0
 if executable('ag')

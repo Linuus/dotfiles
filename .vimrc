@@ -16,7 +16,7 @@
 "
 " original repos on github
 NeoBundle 'alexbel/vim-rubygems'
-NeoBundle 'bling/vim-airline'
+NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 NeoBundle 'edkolev/promptline.vim'
 NeoBundle 'edkolev/tmuxline.vim'
@@ -73,8 +73,6 @@ endif
 filetype plugin indent on     " required!
 runtime macros/matchit.vim
 
-let g:airline_powerline_fonts = 1
-
 let g:promptline_preset = {
         \'a' : [ promptline#slices#jobs(), promptline#slices#host() ],
         \'b' : [ promptline#slices#user() ],
@@ -128,6 +126,7 @@ let g:vim_markdown_folding_disabled=1
 
 let g:syntastic_ruby_checkers = ['rubocop']
 let g:syntastic_always_populate_loc_list=1
+let g:syntastic_mode_map = { 'mode': 'passive' }
 
 """"""""""""""""""""""""""""""""""""""""
 " GENERAL KEY MAPPINGS and commands
@@ -151,6 +150,77 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
+
+
+""""""""""""""""""""""""""""""""""""""""
+" LIGHTLINE CONFIG
+""""""""""""""""""""""""""""""""""""""""
+let g:lightline = {
+      \ 'colorscheme': 'Tomorrow_Night_Eighties',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
+      \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \ },
+      \ 'component_function': {
+      \   'fugitive': 'MyFugitive',
+      \   'readonly': 'MyReadonly',
+      \   'modified': 'MyModified',
+      \   'filename': 'MyFilename'
+      \ },
+      \ 'component_expand': {
+      \   'syntastic': 'SyntasticStatuslineFlag',
+      \ },
+      \ 'component_type': {
+      \   'syntastic': 'error',
+      \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+      \ }
+
+function! MyModified()
+  if &filetype == "help"
+    return ""
+  elseif &modified
+    return "+"
+  elseif &modifiable
+    return ""
+  else
+    return ""
+  endif
+endfunction
+
+function! MyReadonly()
+  if &filetype == "help"
+    return ""
+  elseif &readonly
+    return "⭤"
+  else
+    return ""
+  endif
+endfunction
+
+function! MyFugitive()
+  if exists("*fugitive#head")
+    let _ = fugitive#head()
+    return strlen(_) ? '⭠ '._ : ''
+  endif
+  return ''
+endfunction
+
+function! MyFilename()
+  return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+       \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
+       \ ('' != MyModified() ? ' ' . MyModified() : '')
+endfunction
+
+augroup AutoSyntastic
+  autocmd!
+  autocmd BufWritePost * call s:syntastic()
+augroup END
+function! s:syntastic()
+  SyntasticCheck
+  call lightline#update()
+endfunction
 
 """"""""""""""""""""""""""""""""""""""""
 " UNITE CONFIG AND MAPPINGS

@@ -15,6 +15,7 @@
 " My Bundles here:
 "
 " original repos on github
+NeoBundle 'whatyouhide/vim-gotham'
 NeoBundle 'alexbel/vim-rubygems'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
@@ -28,7 +29,7 @@ NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mustache/vim-mustache-handlebars'
 NeoBundle 'nelstrom/vim-textobj-rubyblock'
 NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'shougo/neocomplcache.vim'
+" NeoBundle 'shougo/neocomplcache.vim'
 NeoBundle 'shougo/unite-outline'
 NeoBundle 'shougo/unite.vim'
 NeoBundle 'shougo/neomru.vim'
@@ -52,6 +53,14 @@ NeoBundle 'shougo/vimproc', {
       \     'unix' : 'make -f make_unix.mak',
       \    },
       \ }
+NeoBundle 'Valloric/YouCompleteMe', {
+     \ 'build' : {
+     \     'mac' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+     \     'unix' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+     \     'windows' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+     \     'cygwin' : './install.sh --clang-completer --system-libclang --omnisharp-completer'
+     \    }
+     \ }
 
 call neobundle#end()
 
@@ -66,7 +75,7 @@ let mapleader="\\"
 if &t_Co > 2 || has("gui_running")
   syntax on
   set background=dark
-  colorscheme tomorrow-night-eighties
+  colorscheme gotham
   set hlsearch
 endif
 
@@ -81,9 +90,9 @@ let g:promptline_preset = {
         \'z' : [ 'Ruby: $(rbenv version-name)' ],
         \'warn' : [ promptline#slices#git_status() ]}
 
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_min_syntax_length = 3
+" let g:neocomplcache_enable_at_startup = 1
+" let g:neocomplcache_enable_smart_case = 1
+" let g:neocomplcache_min_syntax_length = 3
 
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
@@ -151,7 +160,7 @@ endif
 " LIGHTLINE CONFIG
 """"""""""""""""""""""""""""""""""""""""
 let g:lightline = {
-      \ 'colorscheme': 'Tomorrow_Night_Eighties',
+      \ 'colorscheme': 'gotham',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
       \   'right': [ ['lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]

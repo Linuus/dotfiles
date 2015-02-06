@@ -138,6 +138,9 @@ noremap <C-l> :nohlsearch<CR>
 " Align ruby 1.9 hashes
 vnoremap <Leader>ah :Tabularize/\(:.*\)\@<!:\zs /l0<CR>
 
+" Convert hashrockets
+nmap <leader>rh :%s/\v:(\w+) \=\>/\1:/g<cr>
+
 " Neosnippet key-mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)

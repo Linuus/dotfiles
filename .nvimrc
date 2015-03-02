@@ -235,7 +235,7 @@ call unite#custom#source(
 nnoremap [unite]f :Unite -buffer-name=files -profile-name=ignorecase -start-insert neomru/file file_rec/async:!<cr>
 nnoremap [unite]m :Unite -buffer-name=mru -profile-name=ignorecase -start-insert neomru/file<cr>
 nnoremap [unite]e :Unite -buffer-name=files -profile-name=ignorecase -start-insert file<cr>
-nnoremap [unite]g :Unite -buffer-name=search -profile-name=ignorecase grep:.<cr>
+nnoremap [unite]g :Unite -buffer-name=search -profile-name=ignorecase grep:<cr>
 nnoremap [unite]re :UniteResume<cr>
 
 " Files in rails

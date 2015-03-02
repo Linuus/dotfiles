@@ -1,20 +1,16 @@
- if has('vim_starting')
-   set nocompatible               " Be iMproved
+" vim:fdm=marker
+if has('vim_starting')
+  set nocompatible
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
 
-   " Required:
-   set runtimepath+=~/.vim/bundle/neobundle.vim/
- endif
+call neobundle#begin(expand('~/.nvim/bundle/'))
 
- " Required:
- call neobundle#begin(expand('~/.nvim/bundle/'))
+" NeoBundle bundles {{{
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
 
- " Let NeoBundle manage NeoBundle
- " Required:
- NeoBundleFetch 'Shougo/neobundle.vim'
-
-" My Bundles here:
-"
-" original repos on github
 NeoBundle 'whatyouhide/vim-gotham'
 NeoBundle 'alexbel/vim-rubygems'
 NeoBundle 'itchyny/lightline.vim'
@@ -63,9 +59,9 @@ NeoBundle 'Valloric/YouCompleteMe', {
      \ }
 
 call neobundle#end()
+" }}}
 
-""""""""""""""""""""""""""""""""""""""""
-" GENERAL CONFIG
+" GENERAL CONFIG {{{
 """"""""""""""""""""""""""""""""""""""""
 set encoding=utf8
 let mapleader="\\"
@@ -79,7 +75,7 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
 endif
 
-filetype plugin indent on     " required!
+filetype plugin indent on
 runtime macros/matchit.vim
 
 let g:promptline_preset = {
@@ -105,7 +101,7 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 
-set rnu             " Relative line numbers
+set rnu
 set number
 set clipboard+=unnamedplus
 set laststatus=2
@@ -124,12 +120,16 @@ set colorcolumn=120
 set noshowmode
 set cursorline
 
+set foldlevelstart=20
+let ruby_fold=1
+
 let g:vim_markdown_folding_disabled=1
 
 autocmd BufWritePost *.py,*.js,*.rb Neomake
 
-""""""""""""""""""""""""""""""""""""""""
-" GENERAL KEY MAPPINGS and commands
+" }}}
+
+" GENERAL KEY MAPPINGS and commands {{{
 """"""""""""""""""""""""""""""""""""""""
 nnoremap <Leader>n :tabedit ~/Dropbox\ (Personal)/Notes/notes.md<cr>
 
@@ -158,9 +158,9 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
+" }}}
 
-""""""""""""""""""""""""""""""""""""""""
-" LIGHTLINE CONFIG
+" LIGHTLINE CONFIG {{{
 """"""""""""""""""""""""""""""""""""""""
 let g:lightline = {
       \ 'colorscheme': 'gotham',
@@ -215,9 +215,9 @@ function! MyFugitive()
   endif
   return ''
 endfunction
+" }}}
 
-""""""""""""""""""""""""""""""""""""""""
-" UNITE CONFIG AND MAPPINGS
+" UNITE CONFIG AND MAPPINGS {{{
 """"""""""""""""""""""""""""""""""""""""
 autocmd FileType unite match none
 nnoremap [unite] <Nop>
@@ -271,13 +271,7 @@ function! s:unite_my_settings()
   nmap <buffer> <ESC> <Plug>(unite_exit)
 endfunction
 
-" Convenient command to see the difference between the current buffer and the
-" file it was loaded from, thus the changes you made.
-" Only define it when not defined already.
-if !exists(":DiffOrig")
-  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-      \ | wincmd p | diffthis
-endif
+" }}}
 
 " Define a command to make it easier to use
 command! -nargs=+ QFDo call QFDo(<q-args>)

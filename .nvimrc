@@ -93,6 +93,9 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 
+set wildmenu
+set wildmode=longest:full,full
+
 set rnu
 set number
 set clipboard+=unnamedplus

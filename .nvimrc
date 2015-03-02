@@ -25,19 +25,16 @@ NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mustache/vim-mustache-handlebars'
 NeoBundle 'nelstrom/vim-textobj-rubyblock'
 NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'shougo/unite-outline'
 NeoBundle 'shougo/unite.vim'
 NeoBundle 'shougo/neomru.vim'
-NeoBundle 'shougo/neosnippet'
-NeoBundle 'shougo/neosnippet-snippets'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'tpope/vim-bundler'
 NeoBundle 'tpope/vim-endwise'
+NeoBundle 'tpope/vim-vinegar'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'tsukkee/unite-tag'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'benekastah/neomake'
 NeoBundle 'shougo/vimproc', {
@@ -84,10 +81,6 @@ let g:promptline_preset = {
         \'y' : [ promptline#slices#vcs_branch() ],
         \'z' : [ 'Ruby: $(rbenv version-name)' ],
         \'warn' : [ promptline#slices#git_status() ]}
-
-" let g:neocomplcache_enable_at_startup = 1
-" let g:neocomplcache_enable_smart_case = 1
-" let g:neocomplcache_min_syntax_length = 3
 
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
@@ -139,19 +132,6 @@ vnoremap <Leader>ah :Tabularize/\(:.*\)\@<!:\zs /l0<CR>
 
 " Convert hashrockets
 nmap <leader>rh :%s/\v:(\w+) \=\>/\1:/g<cr>
-
-" Neosnippet key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
 
 " For snippet_complete marker.
 if has('conceal')
@@ -243,10 +223,6 @@ nnoremap [unite]rc :Unite -start-insert -profile-name=ignorecase -input=app/cont
 nnoremap [unite]rm :Unite -start-insert -profile-name=ignorecase -input=app/models/ file_rec/async:!<cr>
 nnoremap [unite]rv :Unite -start-insert -profile-name=ignorecase -input=app/views/ file_rec/async:!<cr>
 nnoremap [unite]rs :Unite -start-insert -profile-name=ignorecase -input=spec/ file_rec/async:!<cr>
-
-" Content
-nnoremap [unite]o :Unite -profile-name=ignorecase -start-insert -auto-resize -no-split -auto-preview outline<cr>
-nnoremap [unite]t :Unite -auto-preview -start-insert tag<cr>
 
 let g:unite_force_overwrite_statusline = 0
 if executable('ag')

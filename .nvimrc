@@ -130,6 +130,9 @@ nnoremap <Leader>n :tabedit ~/Dropbox\ (Personal)/Notes/notes.md<cr>
 
 noremap <C-l> :nohlsearch<CR>
 
+" Select pasted text
+nnoremap gp `[v`]
+
 " Align ruby 1.9 hashes
 vnoremap <Leader>ah :Tabularize/\(:.*\)\@<!:\zs /l0<CR>
 

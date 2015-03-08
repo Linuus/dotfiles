@@ -6,11 +6,7 @@ ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="linus"
-ZSH_THEME="linus-zsh-prompt"
-# source $HOME/dotfiles/linus-zsh-prompt.zsh-theme
-
-# Should remove useless space at the right border but does not seem to work...
-export ZLE_RPROMPT_INDENT=0
+ZSH_THEME="linus-pure"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -55,10 +51,7 @@ export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
 
 eval "$(rbenv init -)"
 
-# Alias hub to git
-# eval "$(hub alias -s)"
-
-export EDITOR='vim'
+export EDITOR='nvim'
 
 # tmuxinator setup
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
@@ -72,3 +65,27 @@ export PATH=".git/safe/../../bin:$PATH"
 
 ### Do SSH Magic
 export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
+
+# Vim mode stuff
+bindkey -v
+KEYTIMEOUT=1
+
+RPS1=""
+function zle-line-init zle-keymap-select {
+    RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
+    RPS2=$RPS1
+    zle reset-prompt
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+bindkey -a u undo
+bindkey -a '^R' redo
+bindkey '^?' backward-delete-char
+bindkey '^H' backward-delete-char
+
+bindkey -M viins '^w' backward-kill-word
+bindkey -M vicmd '^w' backward-kill-word
+
+bindkey -M viins '^s' history-incremental-search-backward
+bindkey -M vicmd '^s' history-incremental-search-backward

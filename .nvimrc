@@ -11,32 +11,32 @@ call neobundle#begin(expand('~/.nvim/bundle/'))
 " Required:
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-NeoBundle 'whatyouhide/vim-gotham'
 NeoBundle 'alexbel/vim-rubygems'
-NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'benekastah/neomake'
 NeoBundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
-NeoBundle 'edkolev/promptline.vim'
-NeoBundle 'edkolev/tmuxline.vim'
+NeoBundle 'chriskempson/base16-vim'
+NeoBundle 'gmoe/vim-espresso'
 NeoBundle 'godlygeek/tabular'
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'mileszs/ack.vim'
 NeoBundle 'mattn/webapi-vim'
+NeoBundle 'mileszs/ack.vim'
+NeoBundle 'morhetz/gruvbox'
 NeoBundle 'mustache/vim-mustache-handlebars'
 NeoBundle 'nelstrom/vim-textobj-rubyblock'
 NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'shougo/unite.vim'
 NeoBundle 'shougo/neomru.vim'
+NeoBundle 'shougo/unite.vim'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'tpope/vim-bundler'
 NeoBundle 'tpope/vim-endwise'
-NeoBundle 'tpope/vim-vinegar'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
+NeoBundle 'tpope/vim-vinegar'
 NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'benekastah/neomake'
+NeoBundle 'whatyouhide/vim-gotham'
 NeoBundle 'shougo/vimproc', {
       \ 'build' : {
       \     'windows' : 'make -f make_mingw32.mak',
@@ -66,21 +66,14 @@ let mapleader="\\"
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
   syntax on
+  set t_Co=256
   set background=dark
-  colorscheme gotham
+  colorscheme base16-ocean
   set hlsearch
 endif
 
 filetype plugin indent on
 runtime macros/matchit.vim
-
-let g:promptline_preset = {
-        \'a' : [ promptline#slices#jobs(), promptline#slices#host() ],
-        \'b' : [ promptline#slices#user() ],
-        \'c' : [ promptline#slices#cwd() ],
-        \'y' : [ promptline#slices#vcs_branch() ],
-        \'z' : [ 'Ruby: $(rbenv version-name)' ],
-        \'warn' : [ promptline#slices#git_status() ]}
 
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
@@ -124,6 +117,23 @@ autocmd BufWritePost *.py,*.js,*.rb Neomake
 
 " }}}
 
+" STATUSLINE                        {{{
+""""""""""""""""""""""""""""""""""""""""
+au InsertEnter * hi StatusLine term=reverse ctermfg=0 ctermbg=9
+au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=2
+hi StatusLine term=reverse ctermfg=0 ctermbg=2
+
+set statusline=[%n]\ [%{mode()}]\ %<%.99f\ %h%w%m%r%y%{SL('fugitive#statusline')}%#ErrorMsg#%*%=%-14.(%l/%L,%c%V%)\ %P
+
+function! SL(function)
+  if exists('*'.a:function)
+    return call(a:function,[])
+  else
+    return ''
+  endif
+endfunction
+" }}}
+
 " GENERAL KEY MAPPINGS and commands {{{
 """"""""""""""""""""""""""""""""""""""""
 nnoremap <Leader>n :tabedit ~/Dropbox\ (Personal)/Notes/notes.md<cr>
@@ -143,63 +153,6 @@ nmap <leader>rh :%s/\v:(\w+) \=\>/\1:/g<cr>
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
-" }}}
-
-" LIGHTLINE CONFIG {{{
-""""""""""""""""""""""""""""""""""""""""
-let g:lightline = {
-      \ 'colorscheme': 'gotham',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
-      \   'right': [ ['lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
-      \ },
-      \ 'component_function': {
-      \   'fugitive': 'MyFugitive',
-      \   'readonly': 'MyReadonly',
-      \   'modified': 'MyModified',
-      \   'filename': 'MyFilename'
-      \ },
-      \ 'separator': { 'left': '⮀', 'right': '⮂' },
-      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-      \ }
-
-function! MyModified()
-  if &filetype == "help"
-    return ""
-  elseif &modified
-    return "+"
-  elseif &modifiable
-    return ""
-  else
-    return ""
-  endif
-endfunction
-
-function! MyReadonly()
-  if &filetype == "help"
-    return ""
-  elseif &readonly
-    return "⭤"
-  else
-    return ""
-  endif
-endfunction
-
-function! MyFilename()
-  let fname = expand('%:t')
-  return &ft == 'unite' ? unite#get_status_string() :
-        \ ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-        \ ('' != fname ? fname : '[No Name]') .
-        \ ('' != MyModified() ? ' ' . MyModified() : '')
-endfunction
-
-function! MyFugitive()
-  if exists("*fugitive#head")
-    let _ = fugitive#head()
-    return strlen(_) ? '⭠ '._ : ''
-  endif
-  return ''
-endfunction
 " }}}
 
 " UNITE CONFIG AND MAPPINGS {{{

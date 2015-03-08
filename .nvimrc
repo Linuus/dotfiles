@@ -122,6 +122,7 @@ autocmd BufWritePost *.py,*.js,*.rb Neomake
 au InsertEnter * hi StatusLine term=reverse ctermfg=0 ctermbg=9
 au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=2
 hi StatusLine term=reverse ctermfg=0 ctermbg=2
+hi StatusLineNC term=reverse ctermfg=0 ctermbg=11
 
 set statusline=[%n]\ [%{mode()}]\ %<%.99f\ %h%w%m%r%y%{SL('fugitive#statusline')}%#ErrorMsg#%*%=%-14.(%l/%L,%c%V%)\ %P
 

@@ -116,6 +116,8 @@ au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=2
 hi StatusLine term=reverse ctermfg=0 ctermbg=2
 hi StatusLineNC term=reverse ctermfg=0 ctermbg=11
 
+hi ModeMsg ctermfg=6 cterm=none
+
 set statusline=[%n]\ [%{mode()}]\ %<%.99f\ %h%w%m%r%y%{SL('fugitive#statusline')}%#ErrorMsg#%*%=%-14.(%l/%L,%c%V%)\ %P
 
 function! SL(function)

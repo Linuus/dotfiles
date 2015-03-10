@@ -78,6 +78,11 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 
+set wildignore+=*.a,*.o
+set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
+set wildignore+=.DS_Store,.git,.hg,.svn
+set wildignore+=*~,*.swp,*.tmp
+set wildignore+=*.woff,*.eot,*.ttf
 set wildmenu
 set wildmode=longest:full,full
 
@@ -162,21 +167,14 @@ call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#source('grep', 'matchers', 'matcher_fuzzy')
 call unite#custom#source(
-      \ 'neomru/file', 'matchers',
-      \ ['matcher_project_files', 'matcher_fuzzy', 'converter_relative_word', 'converter_relative_abbr'])
+			\ 'neomru/file,file_rec,file_rec/async,file_rec/git', 'matchers',
+      \ ['matcher_fuzzy', 'matcher_project_files', 'matcher_hide_hidden_files', 'converter_relative_word', 'converter_relative_abbr'])
 
 nnoremap [unite]f :Unite -buffer-name=files -profile-name=ignorecase -start-insert neomru/file file_rec/async:!<cr>
 nnoremap [unite]m :Unite -buffer-name=mru -profile-name=ignorecase -start-insert neomru/file<cr>
 nnoremap [unite]e :Unite -buffer-name=files -profile-name=ignorecase -start-insert file<cr>
 nnoremap [unite]g :Unite -buffer-name=search -profile-name=ignorecase grep:<cr>
 nnoremap [unite]re :UniteResume<cr>
-
-" Files in rails
-nnoremap [unite]ra :Unite -start-insert -profile-name=ignorecase -input=app/assets/ file_rec/async:!<cr>
-nnoremap [unite]rc :Unite -start-insert -profile-name=ignorecase -input=app/controllers/ file_rec/async:!<cr>
-nnoremap [unite]rm :Unite -start-insert -profile-name=ignorecase -input=app/models/ file_rec/async:!<cr>
-nnoremap [unite]rv :Unite -start-insert -profile-name=ignorecase -input=app/views/ file_rec/async:!<cr>
-nnoremap [unite]rs :Unite -start-insert -profile-name=ignorecase -input=spec/ file_rec/async:!<cr>
 
 let g:unite_force_overwrite_statusline = 0
 if executable('ag')

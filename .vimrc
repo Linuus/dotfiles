@@ -7,15 +7,11 @@ call plug#begin('~/.vim/bundle')
 
 " Plug bundles {{{
 Plug 'alexbel/vim-rubygems'
-Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 Plug 'chriskempson/base16-vim'
-Plug 'gmoe/vim-espresso'
 Plug 'godlygeek/tabular'
 Plug 'kana/vim-textobj-user'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mattn/webapi-vim'
-Plug 'mileszs/ack.vim'
-Plug 'morhetz/gruvbox'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'plasticboy/vim-markdown'
@@ -30,7 +26,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby'
-Plug 'whatyouhide/vim-gotham'
 Plug 'shougo/vimproc', { 'do' : 'make -f make_mac.mak' }
 
 call plug#end()
@@ -55,8 +50,6 @@ filetype plugin indent on
 runtime macros/matchit.vim
 
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-let g:ackprg = 'ag --nogroup --nocolor --column'
 
 set listchars=tab:▸\ ,eol:➟
 

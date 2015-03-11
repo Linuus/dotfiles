@@ -1,62 +1,42 @@
- if has('vim_starting')
-   set nocompatible               " Be iMproved
+" vim:fdm=marker
+if has('vim_starting')
+  set nocompatible
+endif
 
-   " Required:
-   set runtimepath+=~/.vim/bundle/neobundle.vim/
- endif
+call plug#begin('~/.vim/bundle')
 
- " Required:
- call neobundle#begin(expand('~/.vim/bundle/'))
+" Plug bundles {{{
+Plug 'alexbel/vim-rubygems'
+Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+Plug 'chriskempson/base16-vim'
+Plug 'gmoe/vim-espresso'
+Plug 'godlygeek/tabular'
+Plug 'kana/vim-textobj-user'
+Plug 'kchmck/vim-coffee-script'
+Plug 'mattn/webapi-vim'
+Plug 'mileszs/ack.vim'
+Plug 'morhetz/gruvbox'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'plasticboy/vim-markdown'
+Plug 'shougo/neomru.vim'
+Plug 'shougo/unite.vim'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar'
+Plug 'vim-ruby/vim-ruby'
+Plug 'whatyouhide/vim-gotham'
+Plug 'shougo/vimproc', { 'do' : 'make -f make_mac.mak' }
 
- " Let NeoBundle manage NeoBundle
- " Required:
- NeoBundleFetch 'Shougo/neobundle.vim'
+call plug#end()
+" }}}
 
-" My Bundles here:
-"
-" original repos on github
-NeoBundle 'alexbel/vim-rubygems'
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
-NeoBundle 'edkolev/promptline.vim'
-NeoBundle 'edkolev/tmuxline.vim'
-NeoBundle 'godlygeek/tabular'
-NeoBundle 'kana/vim-textobj-user'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'mileszs/ack.vim'
-NeoBundle 'mattn/webapi-vim'
-NeoBundle 'mustache/vim-mustache-handlebars'
-NeoBundle 'nelstrom/vim-textobj-rubyblock'
-NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'shougo/neocomplete.vim'
-NeoBundle 'shougo/unite-outline'
-NeoBundle 'shougo/unite.vim'
-NeoBundle 'shougo/neomru.vim'
-NeoBundle 'shougo/neosnippet'
-NeoBundle 'shougo/neosnippet-snippets'
-NeoBundle 'tomtom/tcomment_vim'
-NeoBundle 'tpope/vim-bundler'
-NeoBundle 'tpope/vim-endwise'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'tsukkee/unite-tag'
-NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'Shougo/vimproc', {
-      \ 'build' : {
-      \     'windows' : 'make -f make_mingw32.mak',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
-
-call neobundle#end()
-
-""""""""""""""""""""""""""""""""""""""""
-" GENERAL CONFIG
+" GENERAL CONFIG {{{
 """"""""""""""""""""""""""""""""""""""""
 set encoding=utf8
 let mapleader="\\"
@@ -65,24 +45,14 @@ let mapleader="\\"
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
   syntax on
+  set t_Co=256
   set background=dark
-  colorscheme tomorrow-night-eighties
+  colorscheme base16-ocean
   set hlsearch
 endif
 
-filetype plugin indent on     " required!
+filetype plugin indent on
 runtime macros/matchit.vim
-
-let g:promptline_preset = {
-        \'a' : [ promptline#slices#jobs(), promptline#slices#host() ],
-        \'b' : [ promptline#slices#user() ],
-        \'c' : [ promptline#slices#cwd() ],
-        \'y' : [ promptline#slices#vcs_branch() ],
-        \'z' : [ 'Ruby: $(rbenv version-name)' ],
-        \'warn' : [ promptline#slices#git_status() ]}
-
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
 
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
@@ -90,24 +60,23 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 
 set listchars=tab:▸\ ,eol:➟
 
-set tabstop=2       " The width of a TAB is set to 2.
-                    " Still it is a \t. It is just that
-                    " Vim will interpret it to be having
-                    " a width of 2.
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
 
-set shiftwidth=2    " Indents will have a width of 2
+set wildignore+=*.a,*.o
+set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
+set wildignore+=.DS_Store,.git,.hg,.svn
+set wildignore+=*~,*.swp,*.tmp
+set wildignore+=*.woff,*.eot,*.ttf
+set wildmenu
+set wildmode=longest:full,full
 
-set softtabstop=2   " Sets the number of columns for a TAB
-
-set expandtab       " Expand TABs to spaces
-
-set rnu             " Relative line numbers
+set rnu
 set number
-
-set clipboard=unnamed
-
+set clipboard+=unnamedplus
 set laststatus=2
-
 set bs=2
 
 set incsearch
@@ -115,115 +84,63 @@ set ignorecase
 set smartcase
 
 set undofile
-
 set undodir=~/.tmp
 set backupdir=~/.tmp
-set directory=~/.tmp " Don't clutter my dirs up with swp and tmp files
+set directory=~/.tmp
 
 set colorcolumn=120
+set noshowmode
+set cursorline
+
+set foldlevelstart=20
+let ruby_fold=1
 
 let g:vim_markdown_folding_disabled=1
 
-let g:syntastic_ruby_checkers = ['rubocop']
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_mode_map = { 'mode': 'passive' }
+" }}}
 
+" STATUSLINE                        {{{
 """"""""""""""""""""""""""""""""""""""""
-" GENERAL KEY MAPPINGS and commands
+au InsertEnter * hi StatusLine term=reverse ctermfg=0 ctermbg=9
+au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=2
+hi StatusLine term=reverse ctermfg=0 ctermbg=2
+hi StatusLineNC term=reverse ctermfg=0 ctermbg=11
+
+hi ModeMsg ctermfg=6 cterm=none
+
+set statusline=[%n]\ [%{mode()}]\ %<%.99f\ %h%w%m%r%y%{SL('fugitive#statusline')}%#ErrorMsg#%*%=%-14.(%l/%L,%c%V%)\ %P
+
+function! SL(function)
+  if exists('*'.a:function)
+    return call(a:function,[])
+  else
+    return ''
+  endif
+endfunction
+" }}}
+
+" GENERAL KEY MAPPINGS and commands {{{
 """"""""""""""""""""""""""""""""""""""""
 nnoremap <Leader>n :tabedit ~/Dropbox\ (Personal)/Notes/notes.md<cr>
 
-" Neosnippet key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+noremap <C-l> :nohlsearch<CR>
 
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
+" Select pasted text
+nnoremap gp `[v`]
+
+" Align ruby 1.9 hashes
+vnoremap <Leader>ah :Tabularize/\(:.*\)\@<!:\zs /l0<CR>
+
+" Convert hashrockets
+nmap <leader>rh :%s/\v:(\w+) \=\>/\1:/g<cr>
 
 " For snippet_complete marker.
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
+" }}}
 
-
-""""""""""""""""""""""""""""""""""""""""
-" LIGHTLINE CONFIG
-""""""""""""""""""""""""""""""""""""""""
-let g:lightline = {
-      \ 'colorscheme': 'Tomorrow_Night_Eighties',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
-      \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
-      \ },
-      \ 'component_function': {
-      \   'fugitive': 'MyFugitive',
-      \   'readonly': 'MyReadonly',
-      \   'modified': 'MyModified',
-      \   'filename': 'MyFilename'
-      \ },
-      \ 'component_expand': {
-      \   'syntastic': 'SyntasticStatuslineFlag',
-      \ },
-      \ 'component_type': {
-      \   'syntastic': 'error',
-      \ },
-      \ 'separator': { 'left': '⮀', 'right': '⮂' },
-      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-      \ }
-
-function! MyModified()
-  if &filetype == "help"
-    return ""
-  elseif &modified
-    return "+"
-  elseif &modifiable
-    return ""
-  else
-    return ""
-  endif
-endfunction
-
-function! MyReadonly()
-  if &filetype == "help"
-    return ""
-  elseif &readonly
-    return "⭤"
-  else
-    return ""
-  endif
-endfunction
-
-function! MyFugitive()
-  if exists("*fugitive#head")
-    let _ = fugitive#head()
-    return strlen(_) ? '⭠ '._ : ''
-  endif
-  return ''
-endfunction
-
-function! MyFilename()
-  return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-       \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
-       \ ('' != MyModified() ? ' ' . MyModified() : '')
-endfunction
-
-augroup AutoSyntastic
-  autocmd!
-  autocmd BufWritePost * call s:syntastic()
-augroup END
-function! s:syntastic()
-  SyntasticCheck
-  call lightline#update()
-endfunction
-
-""""""""""""""""""""""""""""""""""""""""
-" UNITE CONFIG AND MAPPINGS
+" UNITE CONFIG AND MAPPINGS {{{
 """"""""""""""""""""""""""""""""""""""""
 autocmd FileType unite match none
 nnoremap [unite] <Nop>
@@ -235,28 +152,14 @@ call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#source('grep', 'matchers', 'matcher_fuzzy')
 call unite#custom#source(
-      \ 'neomru/file', 'matchers',
-      \ ['matcher_project_files', 'matcher_fuzzy', 'converter_relative_word', 'converter_relative_abbr'])
+			\ 'neomru/file,file_rec,file_rec/async,file_rec/git', 'matchers',
+      \ ['matcher_fuzzy', 'matcher_project_files', 'matcher_hide_hidden_files', 'converter_relative_word', 'converter_relative_abbr'])
 
 nnoremap [unite]f :Unite -buffer-name=files -profile-name=ignorecase -start-insert neomru/file file_rec/async:!<cr>
 nnoremap [unite]m :Unite -buffer-name=mru -profile-name=ignorecase -start-insert neomru/file<cr>
 nnoremap [unite]e :Unite -buffer-name=files -profile-name=ignorecase -start-insert file<cr>
-nnoremap [unite]g :Unite -buffer-name=search -profile-name=ignorecase grep:.<cr>
+nnoremap [unite]g :Unite -buffer-name=search -profile-name=ignorecase grep:<cr>
 nnoremap [unite]re :UniteResume<cr>
-
-" Files in rails
-nnoremap [unite]ra :Unite -start-insert -profile-name=ignorecase -input=app/assets/ file_rec/async:!<cr>
-nnoremap [unite]rc :Unite -start-insert -profile-name=ignorecase -input=app/controllers/ file_rec/async:!<cr>
-nnoremap [unite]rm :Unite -start-insert -profile-name=ignorecase -input=app/models/ file_rec/async:!<cr>
-nnoremap [unite]rv :Unite -start-insert -profile-name=ignorecase -input=app/views/ file_rec/async:!<cr>
-nnoremap [unite]rs :Unite -start-insert -profile-name=ignorecase -input=spec/ file_rec/async:!<cr>
-
-" Content
-nnoremap [unite]o :Unite -profile-name=ignorecase -start-insert -auto-resize -no-split -auto-preview outline<cr>
-nnoremap [unite]t :Unite -auto-preview -start-insert tag<cr>
-
-" Align ruby 1.9 hashes
-vnoremap <Leader>ah :Tabularize/\(:.*\)\@<!:\zs /l0<CR>
 
 let g:unite_force_overwrite_statusline = 0
 if executable('ag')
@@ -280,13 +183,7 @@ function! s:unite_my_settings()
   nmap <buffer> <ESC> <Plug>(unite_exit)
 endfunction
 
-" Convenient command to see the difference between the current buffer and the
-" file it was loaded from, thus the changes you made.
-" Only define it when not defined already.
-if !exists(":DiffOrig")
-  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-      \ | wincmd p | diffthis
-endif
+" }}}
 
 " Define a command to make it easier to use
 command! -nargs=+ QFDo call QFDo(<q-args>)
@@ -316,5 +213,3 @@ function! QFDo(command)
         update
     endfor
 endfunction
-
-NeoBundleCheck

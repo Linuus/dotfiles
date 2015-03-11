@@ -15,6 +15,7 @@ Plug 'mattn/webapi-vim'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'plasticboy/vim-markdown'
+Plug 'scrooloose/syntastic'
 Plug 'shougo/neomru.vim'
 Plug 'shougo/unite.vim'
 Plug 'tomtom/tcomment_vim'
@@ -85,6 +86,8 @@ set colorcolumn=120
 set noshowmode
 set cursorline
 
+set clipboard=unnamed
+
 set foldlevelstart=20
 let ruby_fold=1
 
@@ -131,6 +134,15 @@ nmap <leader>rh :%s/\v:(\w+) \=\>/\1:/g<cr>
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
+" }}}
+
+" SYNTASTIC CONFIG          {{{
+""""""""""""""""""""""""""""""""""""""""
+let g:syntastic_ruby_checkers = ['rubocop']
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_auto_loc_list = 2
+let g:syntastic_check_on_wq = 0
 " }}}
 
 " UNITE CONFIG AND MAPPINGS {{{

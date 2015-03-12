@@ -54,6 +54,8 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 set listchars=trail:·,tab:▸\ ,eol:¬
 set list
+highlight ExtraWhitespace ctermbg=1
+match ExtraWhitespace /\s\+$/
 
 set tabstop=2
 set shiftwidth=2

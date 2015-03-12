@@ -52,7 +52,8 @@ runtime macros/matchit.vim
 
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
-set listchars=tab:▸\ ,eol:➟
+set listchars=trail:·,tab:▸\ ,eol:¬
+set list
 
 set tabstop=2
 set shiftwidth=2
@@ -90,6 +91,10 @@ set clipboard=unnamed
 
 set foldlevelstart=20
 let ruby_fold=1
+
+autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 let g:vim_markdown_folding_disabled=1
 

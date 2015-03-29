@@ -90,3 +90,4 @@ bindkey -M vicmd '^w' backward-kill-word
 
 bindkey -M viins '^s' history-incremental-search-backward
 bindkey -M vicmd '^s' history-incremental-search-backward
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -6,6 +6,7 @@ endif
 call plug#begin('~/.vim/bundle')
 
 " Plug bundles {{{
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'alexbel/vim-rubygems'
 Plug 'chriskempson/base16-vim'
 Plug 'godlygeek/tabular'
@@ -62,13 +63,15 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 
+set path=.,**
+
 set wildignore+=*.a,*.o
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
 set wildignore+=.DS_Store,.git,.hg,.svn
 set wildignore+=*~,*.swp,*.tmp
 set wildignore+=*.woff,*.eot,*.ttf
 set wildmenu
-set wildmode=longest:full,full
+set wildmode=longest:list,full
 
 set rnu
 set number

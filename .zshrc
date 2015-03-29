@@ -52,7 +52,7 @@ export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
 
 eval "$(rbenv init -)"
 
-export EDITOR='nvim'
+export EDITOR='vim'
 
 # tmuxinator setup
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator

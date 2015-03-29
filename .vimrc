@@ -140,6 +140,11 @@ vnoremap <Leader>ah :Tabularize/\(:.*\)\@<!:\zs /l0<CR>
 " Convert hashrockets
 nmap <leader>rh :%s/\v:(\w+) \=\>/\1:/g<cr>
 
+" Ggrep for current word or selected text
+nnoremap <leader>f :let @/="\\<<C-R><C-W>\\>"<CR>:set hls<CR>:silent Ggrep -w "<C-R><C-W>"<CR>:ccl<CR>:cw<CR><CR>
+vnoremap <leader>f y:let @/=escape(@", '\\[]$^*.')<CR>:set hls<CR>:silent Ggrep -F "<C-R>=escape(@", '\\"#')<CR>"<CR>:ccl<CR>:cw<CR><CR>
+
+
 " For snippet_complete marker.
 if has('conceal')
   set conceallevel=2 concealcursor=i

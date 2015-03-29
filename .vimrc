@@ -6,10 +6,10 @@ endif
 call plug#begin('~/.vim/bundle')
 
 " Plug bundles {{{
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'alexbel/vim-rubygems'
 Plug 'chriskempson/base16-vim'
 Plug 'godlygeek/tabular'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'kana/vim-textobj-user'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mattn/webapi-vim'
@@ -17,8 +17,6 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'plasticboy/vim-markdown'
 Plug 'scrooloose/syntastic'
-Plug 'shougo/neomru.vim'
-Plug 'shougo/unite.vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-endwise'
@@ -28,7 +26,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby'
-Plug 'shougo/vimproc', { 'do' : 'make -f make_mac.mak' }
 
 call plug#end()
 " }}}
@@ -141,9 +138,8 @@ vnoremap <Leader>ah :Tabularize/\(:.*\)\@<!:\zs /l0<CR>
 nmap <leader>rh :%s/\v:(\w+) \=\>/\1:/g<cr>
 
 " Ggrep for current word or selected text
-nnoremap <leader>f :let @/="\\<<C-R><C-W>\\>"<CR>:set hls<CR>:silent Ggrep -w "<C-R><C-W>"<CR>:ccl<CR>:cw<CR><CR>
-vnoremap <leader>f y:let @/=escape(@", '\\[]$^*.')<CR>:set hls<CR>:silent Ggrep -F "<C-R>=escape(@", '\\"#')<CR>"<CR>:ccl<CR>:cw<CR><CR>
-
+nnoremap <leader>gg :let @/="\\<<C-R><C-W>\\>"<CR>:set hls<CR>:silent Ggrep -w "<C-R><C-W>"<CR>:ccl<CR>:cw<CR><CR>
+vnoremap <leader>gg y:let @/=escape(@", '\\[]$^*.')<CR>:set hls<CR>:silent Ggrep -F "<C-R>=escape(@", '\\"#')<CR>"<CR>:ccl<CR>:cw<CR><CR>
 
 " For snippet_complete marker.
 if has('conceal')
@@ -160,48 +156,22 @@ let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_wq = 0
 " }}}
 
-" UNITE CONFIG AND MAPPINGS {{{
+" FZF MAPPINGS                      {{{
 """"""""""""""""""""""""""""""""""""""""
-autocmd FileType unite match none
-nnoremap [unite] <Nop>
-nmap <space> [unite]
+" Open files in current split
+nnoremap <silent> <Leader>f :call fzf#run({
+\   'up': '40%',
+\   'sink': 'e' })<CR>
 
-let g:unite_matcher_fuzzy_max_input_length = 1/0 " infinity
-let g:unite_source_rec_max_cache_files = 0
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
-call unite#custom#source('grep', 'matchers', 'matcher_fuzzy')
-call unite#custom#source(
-			\ 'neomru/file,file_rec,file_rec/async,file_rec/git', 'matchers',
-      \ ['matcher_fuzzy', 'matcher_project_files', 'matcher_hide_hidden_files', 'converter_relative_word', 'converter_relative_abbr'])
+" Open files in horizontal split
+nnoremap <silent> <Leader>s :call fzf#run({
+\   'up': '40%',
+\   'sink': 'botright split' })<CR>
 
-nnoremap [unite]f :Unite -buffer-name=files -profile-name=ignorecase -start-insert neomru/file file_rec/async:!<cr>
-nnoremap [unite]m :Unite -buffer-name=mru -profile-name=ignorecase -start-insert neomru/file<cr>
-nnoremap [unite]e :Unite -buffer-name=files -profile-name=ignorecase -start-insert file<cr>
-nnoremap [unite]g :Unite -buffer-name=search -profile-name=ignorecase grep:<cr>
-nnoremap [unite]re :UniteResume<cr>
-
-let g:unite_force_overwrite_statusline = 0
-if executable('ag')
-  let g:unite_source_rec_async_command = 'ag --nogroup --nocolor --column --hidden ' .
-                                       \ '--ignore ".git" ' .
-                                       \ '--ignore "app/assets/fonts" ' .
-                                       \ '--ignore "tmp" ' .
-                                       \ '--ignore "log" ' .
-                                       \ '--ignore "app/assets/images" ' .
-                                       \ '--ignore "public/uploads" -g ""'
-
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column --hidden'
-  let g:unite_source_grep_recursive_opt = ''
-endif
-
-autocmd FileType unite call s:unite_my_settings()
-function! s:unite_my_settings()
-  imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
-  imap <silent><buffer><expr> <C-x> unite#do_action('split')
-  nmap <buffer> <ESC> <Plug>(unite_exit)
-endfunction
+" Open files in vertical horizontal split
+nnoremap <silent> <Leader>v :call fzf#run({
+\   'up': '40%',
+\   'sink':  'vertical botright split' })<CR>
 
 " }}}
 

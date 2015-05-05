@@ -1,1 +1,3 @@
 set editor='/usr/local/bin/gvim -f +<line> +"sil! call cursor(0, <column>)" <file>'
+map -b j 5j
+map -b k 5k

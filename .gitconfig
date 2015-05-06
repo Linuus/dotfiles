@@ -1,0 +1,16 @@
+[user]
+  name = Linus Pettersson
+  email = linus.pettersson@gmail.com
+[push]
+  default = simple
+[init]
+  templatedir = ~/.git_template
+[alias]
+  ctags = !.git/hooks/ctags
+  st = status
+  co = checkout
+  l = "!. ~/dotfiles/githelpers && pretty_git_log"
+  la = !git l --all
+  r = !GIT_NO_PAGER=1 git l -30
+[color]
+  ui = true

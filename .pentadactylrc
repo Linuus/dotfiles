@@ -5,5 +5,5 @@ map -builtin j 5j
 map -builtin k 5k
 map -builtin l 5l
 
-map J -silent :bnext<CR>
-map K -silent :bprev<CR>
+map J -silent :bprev<CR>
+map K -silent :bnext<CR>

@@ -158,21 +158,22 @@ let g:syntastic_check_on_wq = 0
 
 " FZF MAPPINGS                      {{{
 """"""""""""""""""""""""""""""""""""""""
-" Open files in current split
-nnoremap <silent> <Leader>f :call fzf#run({
-\   'up': '40%',
-\   'sink': 'e' })<CR>
+function! s:fzf_handler(lines) abort
+  if empty(a:lines)
+    return
+  endif
+  let cmd = get({ 'ctrl-t': 'tabedit',
+                \ 'ctrl-x': 'split',
+                \ 'ctrl-v': 'vsplit' }, remove(a:lines, 0), 'e')
+  for item in a:lines
+    execute cmd escape(item, ' %#\')
+  endfor
+endfunction
 
-" Open files in horizontal split
-nnoremap <silent> <Leader>s :call fzf#run({
-\   'up': '40%',
-\   'sink': 'botright split' })<CR>
-
-" Open files in vertical horizontal split
-nnoremap <silent> <Leader>v :call fzf#run({
-\   'up': '40%',
-\   'sink':  'vertical botright split' })<CR>
-
+nnoremap <silent> <leader>f :call fzf#run({
+  \ 'options': '--expect=ctrl-t,ctrl-x,ctrl-v',
+  \ 'up':      '40%',
+  \ 'sink*':   function('<sid>fzf_handler')})<cr>
 " }}}
 
 " Define a command to make it easier to use

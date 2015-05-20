@@ -147,7 +147,12 @@ if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 " }}}
-
+"
+" UNDOTREE CONFIG          {{{
+""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>u :UndotreeToggle<cr>
+" }}}
+"
 " SYNTASTIC CONFIG          {{{
 """"""""""""""""""""""""""""""""""""""""
 let g:syntastic_ruby_checkers = ['rubocop']

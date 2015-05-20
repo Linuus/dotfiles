@@ -13,6 +13,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'kana/vim-textobj-user'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mattn/webapi-vim'
+Plug 'mbbill/undotree'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'plasticboy/vim-markdown'

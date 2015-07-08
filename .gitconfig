@@ -14,3 +14,5 @@
   r = !GIT_NO_PAGER=1 git l -30
 [color]
   ui = true
+[core]
+	excludesfile = /Users/linus/.gitignore

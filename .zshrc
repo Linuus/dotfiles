@@ -66,7 +66,7 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export PATH=".git/safe/../../bin:$PATH"
 
 ### Do SSH Magic
-export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
+#export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
 
 # Vim mode stuff
 bindkey -v

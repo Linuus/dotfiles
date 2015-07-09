@@ -35,7 +35,8 @@ call plug#end()
 " GENERAL CONFIG {{{
 """"""""""""""""""""""""""""""""""""""""
 set encoding=utf8
-let mapleader="\\"
+nnoremap <space> <nop>
+let mapleader="\<space>"
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -183,6 +184,15 @@ nnoremap <silent> <leader>f :call fzf#run({
   \ 'options': '--expect=ctrl-t,ctrl-x,ctrl-v',
   \ 'up':      '40%',
   \ 'sink*':   function('<sid>fzf_handler')})<cr>
+
+command! -bar FZFTags if !empty(tagfiles()) | call fzf#run({
+\   'source': "sed '/^\\!/d;s/\t.*//' " . join(tagfiles()) . ' | uniq',
+\   'sink':   'tag',
+\   'options':  '+m',
+\   'right':     40
+\ }) | else | echo 'No tags available!' | endif
+nnoremap <silent> <leader>c :FZFTags<cr>
+
 " }}}
 
 " Define a command to make it easier to use

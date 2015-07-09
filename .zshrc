@@ -18,6 +18,7 @@ alias be='bundle exec'
 alias rdm='be rake db:migrate db:test:prepare'
 alias rdr='be rake db:rollback db:test:prepare'
 alias reseedfu='be rake db:reset db:seed_fu'
+alias die='spring stop'
 
 # Disable autocorrect
 DISABLE_CORRECTION="true"

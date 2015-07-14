@@ -8,8 +8,8 @@ call plug#begin('~/.vim/bundle')
 " Plug bundles {{{
 Plug 'alexbel/vim-rubygems'
 Plug 'chriskempson/base16-vim'
-Plug 'godlygeek/tabular'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'junegunn/vim-easy-align'
 Plug 'kana/vim-textobj-user'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mattn/webapi-vim'
@@ -129,13 +129,13 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""
 nnoremap <Leader>n :tabedit ~/Dropbox\ (Personal)/Notes/notes.md<cr>
 
+nnoremap <leader>t :Rake<CR>
+nnoremap <leader>T :Rake test<CR>
+
 noremap <C-l> :nohlsearch<CR>
 
 " Select pasted text
 nnoremap gp `[v`]
-
-" Align ruby 1.9 hashes
-vnoremap <Leader>ah :Tabularize/\(:.*\)\@<!:\zs /l0<CR>
 
 " Convert hashrockets
 nmap <leader>rh :%s/\v:(\w+) \=\>/\1:/g<cr>
@@ -164,6 +164,13 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_wq = 0
+" }}}
+
+
+" EASY ALIGN MAPPINGS               {{{
+""""""""""""""""""""""""""""""""""""""""
+vmap <Enter> <Plug>(EasyAlign)
+nmap <Leader>a <Plug>(EasyAlign)
 " }}}
 
 " FZF MAPPINGS                      {{{

@@ -1,58 +1,40 @@
 " vim:fdm=marker
-if has('vim_starting')
-  set nocompatible
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
 
-call neobundle#begin(expand('~/.nvim/bundle/'))
+call plug#begin('~/.nvim/bundle')
 
-" NeoBundle bundles {{{
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+" Plug bundles {{{
+Plug 'alexbel/vim-rubygems'
+Plug 'benekastah/neomake'
+Plug 'chriskempson/base16-vim'
+Plug 'janko-m/vim-test'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'junegunn/vim-easy-align'
+Plug 'kana/vim-textobj-user'
+Plug 'kchmck/vim-coffee-script'
+Plug 'mattn/webapi-vim'
+Plug 'mbbill/undotree'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'plasticboy/vim-markdown'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rake'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar'
+Plug 'vim-ruby/vim-ruby'
 
-NeoBundle 'alexbel/vim-rubygems'
-NeoBundle 'benekastah/neomake'
-NeoBundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
-NeoBundle 'chriskempson/base16-vim'
-NeoBundle 'gmoe/vim-espresso'
-NeoBundle 'godlygeek/tabular'
-NeoBundle 'kana/vim-textobj-user'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'mattn/webapi-vim'
-NeoBundle 'mileszs/ack.vim'
-NeoBundle 'morhetz/gruvbox'
-NeoBundle 'mustache/vim-mustache-handlebars'
-NeoBundle 'nelstrom/vim-textobj-rubyblock'
-NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'shougo/neomru.vim'
-NeoBundle 'shougo/unite.vim'
-NeoBundle 'tomtom/tcomment_vim'
-NeoBundle 'tpope/vim-bundler'
-NeoBundle 'tpope/vim-endwise'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'tpope/vim-vinegar'
-NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'whatyouhide/vim-gotham'
-NeoBundle 'shougo/vimproc', {
-      \ 'build' : {
-      \     'windows' : 'make -f make_mingw32.mak',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
-
-call neobundle#end()
+call plug#end()
 " }}}
 
 " GENERAL CONFIG {{{
 """"""""""""""""""""""""""""""""""""""""
 set encoding=utf8
-let mapleader="\\"
+nnoremap <space> <nop>
+let mapleader="\<space>"
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -69,14 +51,17 @@ runtime macros/matchit.vim
 
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
-let g:ackprg = 'ag --nogroup --nocolor --column'
-
-set listchars=tab:▸\ ,eol:➟
+set listchars=trail:·,tab:▸\ ,eol:¬
+set list
+highlight ExtraWhitespace ctermbg=1
+match ExtraWhitespace /\s\+$/
 
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
+
+set path=.,**
 
 set wildignore+=*.a,*.o
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
@@ -84,7 +69,7 @@ set wildignore+=.DS_Store,.git,.hg,.svn
 set wildignore+=*~,*.swp,*.tmp
 set wildignore+=*.woff,*.eot,*.ttf
 set wildmenu
-set wildmode=longest:full,full
+set wildmode=longest:list,full
 
 set rnu
 set number
@@ -105,12 +90,16 @@ set colorcolumn=120
 set noshowmode
 set cursorline
 
+set clipboard=unnamed
+
 set foldlevelstart=20
 let ruby_fold=1
 
-let g:vim_markdown_folding_disabled=1
+autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
-autocmd BufWritePost *.py,*.js,*.rb Neomake
+let g:vim_markdown_folding_disabled=1
 
 " }}}
 
@@ -138,65 +127,73 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""
 nnoremap <Leader>n :tabedit ~/Dropbox\ (Personal)/Notes/notes.md<cr>
 
+nnoremap <leader>t :Rake<CR>
+nnoremap <leader>T :Rake test<CR>
+let test#strategy = "neovim"
+
 noremap <C-l> :nohlsearch<CR>
 
 " Select pasted text
 nnoremap gp `[v`]
 
-" Align ruby 1.9 hashes
-vnoremap <Leader>ah :Tabularize/\(:.*\)\@<!:\zs /l0<CR>
-
 " Convert hashrockets
 nmap <leader>rh :%s/\v:(\w+) \=\>/\1:/g<cr>
+
+" Ggrep for current word or selected text
+nnoremap <leader>gg :let @/="\\<<C-R><C-W>\\>"<CR>:set hls<CR>:silent Ggrep -w "<C-R><C-W>"<CR>:ccl<CR>:cw<CR><CR>
+vnoremap <leader>gg y:let @/=escape(@", '\\[]$^*.')<CR>:set hls<CR>:silent Ggrep -F "<C-R>=escape(@", '\\"#')<CR>"<CR>:ccl<CR>:cw<CR><CR>
 
 " For snippet_complete marker.
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 " }}}
-
-" UNITE CONFIG AND MAPPINGS {{{
+"
+" UNDOTREE CONFIG          {{{
 """"""""""""""""""""""""""""""""""""""""
-autocmd FileType unite match none
-nnoremap [unite] <Nop>
-nmap <space> [unite]
+let g:undotree_SetFocusWhenToggle = 1
+let g:undotree_WindowLayout = 2
+nnoremap <leader>u :UndotreeToggle<cr>
+" }}}
+"
+" SYNTASTIC CONFIG          {{{
+""""""""""""""""""""""""""""""""""""""""
+autocmd! BufWritePost *.rb Neomake
+" }}}
 
-let g:unite_matcher_fuzzy_max_input_length = 1/0 " infinity
-let g:unite_source_rec_max_cache_files = 0
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
-call unite#custom#source('grep', 'matchers', 'matcher_fuzzy')
-call unite#custom#source(
-			\ 'neomru/file,file_rec,file_rec/async,file_rec/git', 'matchers',
-      \ ['matcher_fuzzy', 'matcher_project_files', 'matcher_hide_hidden_files', 'converter_relative_word', 'converter_relative_abbr'])
 
-nnoremap [unite]f :Unite -buffer-name=files -profile-name=ignorecase -start-insert neomru/file file_rec/async:!<cr>
-nnoremap [unite]m :Unite -buffer-name=mru -profile-name=ignorecase -start-insert neomru/file<cr>
-nnoremap [unite]e :Unite -buffer-name=files -profile-name=ignorecase -start-insert file<cr>
-nnoremap [unite]g :Unite -buffer-name=search -profile-name=ignorecase grep:<cr>
-nnoremap [unite]re :UniteResume<cr>
+" EASY ALIGN MAPPINGS               {{{
+""""""""""""""""""""""""""""""""""""""""
+vmap <Enter> <Plug>(EasyAlign)
+nmap <Leader>a <Plug>(EasyAlign)
+" }}}
 
-let g:unite_force_overwrite_statusline = 0
-if executable('ag')
-  let g:unite_source_rec_async_command = 'ag --nogroup --nocolor --column --hidden ' .
-                                       \ '--ignore ".git" ' .
-                                       \ '--ignore "app/assets/fonts" ' .
-                                       \ '--ignore "tmp" ' .
-                                       \ '--ignore "log" ' .
-                                       \ '--ignore "app/assets/images" ' .
-                                       \ '--ignore "public/uploads" -g ""'
-
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column --hidden'
-  let g:unite_source_grep_recursive_opt = ''
-endif
-
-autocmd FileType unite call s:unite_my_settings()
-function! s:unite_my_settings()
-  imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
-  imap <silent><buffer><expr> <C-x> unite#do_action('split')
-  nmap <buffer> <ESC> <Plug>(unite_exit)
+" FZF MAPPINGS                      {{{
+""""""""""""""""""""""""""""""""""""""""
+function! s:fzf_handler(lines) abort
+  if empty(a:lines)
+    return
+  endif
+  let cmd = get({ 'ctrl-t': 'tabedit',
+                \ 'ctrl-x': 'split',
+                \ 'ctrl-v': 'vsplit' }, remove(a:lines, 0), 'e')
+  for item in a:lines
+    execute cmd escape(item, ' %#\')
+  endfor
 endfunction
+
+nnoremap <silent> <leader>f :call fzf#run({
+  \ 'options': '--expect=ctrl-t,ctrl-x,ctrl-v',
+  \ 'up':      '40%',
+  \ 'sink*':   function('<sid>fzf_handler')})<cr>
+
+command! -bar FZFTags if !empty(tagfiles()) | call fzf#run({
+\   'source': "sed '/^\\!/d;s/\t.*//' " . join(tagfiles()) . ' | uniq',
+\   'sink':   'tag',
+\   'options':  '+m',
+\   'right':     40
+\ }) | else | echo 'No tags available!' | endif
+nnoremap <silent> <leader>c :FZFTags<cr>
 
 " }}}
 
@@ -228,5 +225,3 @@ function! QFDo(command)
         update
     endfor
 endfunction
-
-NeoBundleCheck

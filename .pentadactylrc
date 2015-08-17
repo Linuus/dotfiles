@@ -1,4 +1,5 @@
 set editor='/usr/local/bin/gvim -f +<line> +"sil! call cursor(0, <column>)" <file>'
+set go+=mbT
 
 map -builtin h 5h
 map -builtin j 5j

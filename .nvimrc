@@ -10,6 +10,7 @@ Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'junegunn/vim-easy-align'
 Plug 'kana/vim-textobj-user'
+Plug 'kassio/neoterm'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mattn/webapi-vim'
 Plug 'mbbill/undotree'
@@ -129,7 +130,7 @@ nnoremap <Leader>n :tabedit ~/Dropbox\ (Personal)/Notes/notes.md<cr>
 
 nnoremap <leader>t :Rake<CR>
 nnoremap <leader>T :Rake test<CR>
-let test#strategy = "neovim"
+let test#strategy = "neoterm"
 
 noremap <C-l> :nohlsearch<CR>
 

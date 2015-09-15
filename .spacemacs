@@ -20,6 +20,7 @@
      auto-completion
      emacs-lisp
      git
+     dash
      ;; markdown
      ruby
      org

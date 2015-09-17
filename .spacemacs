@@ -21,12 +21,15 @@
      emacs-lisp
      git
      dash
+     html
      ;; markdown
      ruby
+     ruby-on-rails
      org
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
+     (shell :variables
+            shell-default-shell 'eshell
+            shell-default-height 30
+            shell-default-position 'bottom)
      syntax-checking
      version-control
      )
@@ -158,7 +161,6 @@ before layers configuration."
   ;; User initialization goes here
   (setq-default
    ruby-version-manager 'rbenv
-   ruby-enable-ruby-on-rails-support t
    enh-ruby-add-encoding-comment-on-save nil
    )
   )
@@ -169,6 +171,7 @@ before layers configuration."
 layers configuration."
   (global-linum-mode)
   (linum-relative-toggle)
+  (blink-cursor-mode t)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will

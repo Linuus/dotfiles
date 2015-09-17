@@ -169,6 +169,7 @@ before layers configuration."
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
+  (setq evil-move-beyond-eol nil)
   (global-linum-mode)
   (linum-relative-toggle)
   (blink-cursor-mode t)

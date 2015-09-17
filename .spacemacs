@@ -19,6 +19,8 @@
      ;; ----------------------------------------------------------------
      auto-completion
      emacs-lisp
+     elixir
+     erlang
      git
      dash
      html

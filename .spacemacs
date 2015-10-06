@@ -84,7 +84,7 @@ before layers configuration."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Droid Sans Mono"
+   dotspacemacs-default-font '("Hack"
                                :size 16
                                :weight normal
                                :width normal
@@ -167,7 +167,7 @@ before layers configuration."
    )
   )
 
-(defun dotspacemacs/config ()
+(defun dotspacemacs/user-config ()
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."

@@ -84,7 +84,7 @@ before layers configuration."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Droid Sans Mono"
+   dotspacemacs-default-font '("Hack"
                                :size 16
                                :weight normal
                                :width normal
@@ -167,10 +167,25 @@ before layers configuration."
    )
   )
 
-(defun dotspacemacs/config ()
+(defun dotspacemacs/user-config ()
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
+
+  ;; major-mode specific indent levels
+  (setq default-indent-level 2)
+  (setq ruby-indent-level 2)
+  (setq css-indent-level 2)
+  (setq js-indent-level 2)
+
+  (add-hook 'enh-ruby-mode-hook
+    (function (lambda ()
+      (setq evil-shift-width default-indent-level))))
+
+  (add-hook 'js-mode-hook
+    (function (lambda ()
+      (setq evil-shift-width js-indent-level))))
+
   (setq evil-move-beyond-eol nil)
   (global-linum-mode)
   (linum-relative-toggle)

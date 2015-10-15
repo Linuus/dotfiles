@@ -159,7 +159,9 @@ before layers configuration."
    ;; specified with an installed package.
    ;; Not used for now.
    dotspacemacs-default-package-repository nil
-   )
+   ))
+
+(defun dotspacemacs/user-init()
   ;; User initialization goes here
   (setq-default
    ruby-version-manager 'rbenv
@@ -187,6 +189,7 @@ layers configuration."
       (setq evil-shift-width js-indent-level))))
 
   (setq evil-move-beyond-eol nil)
+
   (global-linum-mode)
   (linum-relative-toggle)
   (blink-cursor-mode t)

@@ -45,6 +45,7 @@ plugins=(git brew heroku gem zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 unsetopt correct
+unsetopt auto_cd
 
 # Customize to your needs...
 export PATH=/usr/local/git/bin:/usr/local/bin:/usr/bin:/bin:~/bin:/usr/sbin:/usr/local/sbin:/sbin:/usr/X11/bin:/usr/local:/usr/local/CrossPack-AVR/bin

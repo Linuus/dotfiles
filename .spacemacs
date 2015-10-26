@@ -166,7 +166,6 @@ before layers configuration."
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
-
   (setq-default
    ruby-version-manager 'rbenv
    enh-ruby-add-encoding-comment-on-save nil)
@@ -253,6 +252,7 @@ layers configuration."
       (setq evil-shift-width js-indent-level))))
 
   (setq evil-move-beyond-eol nil)
+
   (global-linum-mode)
   (linum-relative-toggle)
   (blink-cursor-mode t)

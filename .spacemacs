@@ -20,6 +20,7 @@
      auto-completion
      emacs-lisp
      elixir
+     erc
      erlang
      git
      dash
@@ -159,13 +160,78 @@ before layers configuration."
    ;; specified with an installed package.
    ;; Not used for now.
    dotspacemacs-default-package-repository nil
-   )
-  ;; User initialization goes here
+   ))
+
+(defun dotspacemacs/user-init ()
+  "Initialization function for user code.
+It is called immediately after `dotspacemacs/init'.  You are free to put any
+user code."
+
   (setq-default
    ruby-version-manager 'rbenv
-   enh-ruby-add-encoding-comment-on-save nil
-   )
+   enh-ruby-add-encoding-comment-on-save nil)
+
+  (spacemacs|use-package-add-hook erc
+    :post-config
+    (progn
+      ;; (defun erc-slack-connect ()
+      ;;   "Quick connect to hrx slack."
+      ;;   (interactive)
+      ;;   (erc-ssl :server "hackreactorx.irc.slack.com"
+      ;;            :port 6697
+      ;;            :nick "mccloud.christopher"
+      ;;            :password user-slack-irc-password))
+
+      ;; (defun erc-gitter-connect ()
+      ;;   "Quick connect to irc.gitter.im"
+      ;;   (interactive)
+      ;;   ;; clean up old buffers if they exist
+      ;;   (dolist (buf '("irc.gitter.im:6667" "#syl20bnr/spacemacs"))
+      ;;     (when (get-buffer buf) (kill-buffer buf)))
+      ;;   (erc-ssl :server "irc.gitter.im"
+      ;;            :port 6667
+      ;;            :nick "cmccloud"
+      ;;            :password user-gitter-irc-password))
+
+      (defun erc-freenode-connect ()
+        "Quick connect to irc.freenode.net"
+        (interactive)
+        ;; clean up old buffers if they exist
+        (dolist (buf '("irc.freenode.net:6667" "#elixir-lang" "#qutebrowser"))
+          (when (get-buffer buf) (kill-buffer buf)))
+        (erc :server "irc.freenode.net"
+             :port 6667
+             :nick "Linuus"))
+
+      (evil-leader/set-key
+        "aif" 'erc-freenode-connect)
+        ;; "aig" 'erc-gitter-connect
+        ;; "ais" 'erc-slack-connect)
+
+      ;; if imagemagick isn't supported, we don't want inline images
+      (unless (fboundp 'imagemagick-types)
+        (setq erc-modules (-remove-item 'image erc-modules)))
+
+      (setq erc-autojoin-channels-alist
+            '(("freenode.net" "#elixir-lang" "#qutebrowser"))
+            erc-hide-list '("JOIN" "PART" "QUIT" "NICK" "MODE" "353")
+            erc-track-exclude-types '("JOIN" "PART" "QUIT" "NICK" "MODE" "353")
+            erc-track-exclude-server-buffer t
+            erc-track-position-in-mode-line t
+            erc-join-buffer 'bury
+            erc-hl-nicks-minimum-contrast-ratio 2.5
+            erc-hl-nicks-color-contrast-strategy '(invert contrast)
+            erc-current-nick-highlight-type 'all
+            erc-log-insert-log-on-open nil
+            erc-track-shorten-aggressively 'max)
+            ;; erc-prompt-for-nickserv-password nil
+            ;; erc-enable-sasl-auth t
+            ;; erc-sasl-server-regexp-list '("irc\\.freenode\\.net"))
+
+      ;; we dont need paren highlighting
+      (add-hook 'erc-mode-hook 'turn-off-show-smartparens-mode)))
   )
+
 
 (defun dotspacemacs/user-config ()
   "Configuration function.

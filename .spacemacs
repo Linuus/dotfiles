@@ -164,8 +164,8 @@ before layers configuration."
 
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
-It is called immediately after `dotspacemacs/init'.  You are free to put any
-user code."
+    It is called immediately after `dotspacemacs/init'.  You are free to put any user code."
+
   (setq-default
    ruby-version-manager 'rbenv
    enh-ruby-add-encoding-comment-on-save nil)
@@ -220,6 +220,7 @@ user code."
             erc-join-buffer 'bury
             erc-hl-nicks-minimum-contrast-ratio 2.5
             erc-hl-nicks-color-contrast-strategy '(invert contrast)
+            erc-fill-column 120
             erc-current-nick-highlight-type 'all
             erc-log-insert-log-on-open nil
             erc-track-shorten-aggressively 'max)
@@ -233,9 +234,9 @@ user code."
 
 
 (defun dotspacemacs/user-config ()
-  "Configuration function.
- This function is called at the very end of Spacemacs initialization after
-layers configuration."
+
+  (defmacro linus/remove-from-list (list-var element)
+    `(setq ,list-var (remove ,element ,list-var)))
 
   ;; major-mode specific indent levels
   (setq default-indent-level 2)
@@ -255,7 +256,24 @@ layers configuration."
 
   (global-linum-mode)
   (linum-relative-toggle)
-  (blink-cursor-mode t)
+
+  (dolist (mode '(erc-mode
+                  comint-mode
+                  term-mode
+                  eshell-mode))
+    (linus/remove-from-list evil-insert-state-modes mode))
+
+  (let ((comint-hooks '(eshell-mode-hook
+                        term-mode-hook
+                        erc-mode-hook
+                        messages-buffer-mode-hook
+                        comint-mode-hook)))
+    (spacemacs/add-to-hooks (defun linus/no-hl-line-mode ()
+                              (setq-local global-hl-line-mode nil))
+                            comint-hooks)
+    (spacemacs/add-to-hooks (defun linus/no-scroll-margin ()
+                              (setq-local scroll-margin 0))
+                            comint-hooks)) (blink-cursor-mode t)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will

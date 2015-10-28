@@ -221,6 +221,8 @@ before layers configuration."
             erc-hl-nicks-minimum-contrast-ratio 2.5
             erc-hl-nicks-color-contrast-strategy '(invert contrast)
             erc-fill-column 120
+            erc-fill-function 'erc-fill-static
+            erc-fill-static-center 20
             erc-current-nick-highlight-type 'all
             erc-log-insert-log-on-open nil
             erc-track-shorten-aggressively 'max)

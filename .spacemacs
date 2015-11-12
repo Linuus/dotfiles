@@ -166,10 +166,6 @@ before layers configuration."
   "Initialization function for user code.
     It is called immediately after `dotspacemacs/init'.  You are free to put any user code."
 
-  (setq-default
-   ruby-version-manager 'rbenv
-   enh-ruby-add-encoding-comment-on-save nil)
-
   (spacemacs|use-package-add-hook erc
     :post-config
     (progn
@@ -245,6 +241,10 @@ before layers configuration."
   (setq ruby-indent-level 2)
   (setq css-indent-level 2)
   (setq js-indent-level 2)
+
+  (setq-default
+   ruby-version-manager 'rbenv
+   ruby-insert-encoding-magic-comment nil)
 
   (add-hook 'enh-ruby-mode-hook
     (function (lambda ()

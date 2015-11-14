@@ -35,6 +35,7 @@
             shell-default-position 'bottom)
      syntax-checking
      version-control
+     themes-megapack
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -66,7 +67,7 @@ before layers configuration."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed.
-   dotspacemacs-startup-banner 'official
+   dotspacemacs-startup-banner nil
    ;; List of items to show in the startup buffer. If nil it is disabled.
    ;; Possible values are: `recents' `bookmarks' `projects'."
    dotspacemacs-startup-lists '(recents projects)
@@ -255,6 +256,8 @@ before layers configuration."
       (setq evil-shift-width js-indent-level))))
 
   (setq evil-move-beyond-eol nil)
+
+  (setq powerline-default-separator 'slant)
 
   (global-linum-mode)
   (linum-relative-toggle)

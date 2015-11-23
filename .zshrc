@@ -50,6 +50,8 @@ unsetopt auto_cd
 # Customize to your needs...
 export PATH=/usr/local/git/bin:/usr/local/bin:/usr/bin:/bin:~/bin:/usr/sbin:/usr/local/sbin:/sbin:/usr/X11/bin:/usr/local:/usr/local/CrossPack-AVR/bin
 
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
+
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
 
 eval "$(rbenv init -)"

@@ -52,6 +52,9 @@ export PATH=/usr/local/git/bin:/usr/local/bin:/usr/bin:/bin:~/bin:/usr/sbin:/usr
 
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
 
+# Fix mactex path
+export PATH=$PATH:/Library/TeX/texbin
+
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
 
 eval "$(rbenv init -)"

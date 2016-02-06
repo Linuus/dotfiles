@@ -23,6 +23,7 @@
      erc
      erlang
      git
+     latex
      dash
      html
      markdown

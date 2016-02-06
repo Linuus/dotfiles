@@ -27,9 +27,6 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export PATH=".git/safe/../../bin:$PATH"
 
 # Vim mode stuff
-bindkey -v
-KEYTIMEOUT=1
-
 RPS1=""
 function zle-line-init zle-keymap-select {
     RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"

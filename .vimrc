@@ -187,7 +187,7 @@ function! s:fzf_handler(lines) abort
   endfor
 endfunction
 
-nnoremap <silent> <leader>f :call fzf#run({
+nnoremap <silent> <leader>pf :call fzf#run({
   \ 'options': '--expect=ctrl-t,ctrl-x,ctrl-v',
   \ 'up':      '40%',
   \ 'sink*':   function('<sid>fzf_handler')})<cr>

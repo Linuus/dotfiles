@@ -169,6 +169,9 @@ before layers configuration."
   "Initialization function for user code.
     It is called immediately after `dotspacemacs/init'.  You are free to put any user code."
 
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; ERC CONFIG
+
   (spacemacs|use-package-add-hook erc
     :post-config
     (progn
@@ -229,8 +232,10 @@ before layers configuration."
             ;; erc-enable-sasl-auth t
             ;; erc-sasl-server-regexp-list '("irc\\.freenode\\.net"))
 
-      ;; we dont need paren highlighting
       (add-hook 'erc-mode-hook 'turn-off-show-smartparens-mode)))
+
+  ;; END ERC CONFIG
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   )
 
 
@@ -238,6 +243,9 @@ before layers configuration."
 
   (defmacro linus/remove-from-list (list-var element)
     `(setq ,list-var (remove ,element ,list-var)))
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; INDENTATION
 
   ;; major-mode specific indent levels
   (setq default-indent-level 2)
@@ -258,23 +266,45 @@ before layers configuration."
    ruby-insert-encoding-magic-comment nil)
 
   (add-hook 'web-mode-hook
-    (function (lambda ()
-      (setq evil-shift-width default-indent-level))))
+            (function (lambda ()
+                        (setq evil-shift-width default-indent-level))))
 
   (add-hook 'ruby-mode-hook
-    (function (lambda ()
-      (setq evil-shift-width default-indent-level))))
+            (function (lambda ()
+                        (setq evil-shift-width default-indent-level))))
 
   (add-hook 'js-mode-hook
-    (function (lambda ()
-      (setq evil-shift-width js-indent-level))))
+            (function (lambda ()
+                        (setq evil-shift-width js-indent-level))))
 
-  (setq evil-move-beyond-eol nil)
+  ;; END INDENTATION
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  (setq powerline-default-separator 'slant)
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; ORG CONFIG
 
-  (global-linum-mode)
-  (linum-relative-toggle)
+  (with-eval-after-load 'org
+    (setq org-agenda-files (quote ("~/Dropbox (Personal)/Notes/personal.org"
+                                   "~/Dropbox (Personal)/Notes/work.org")))
+
+    (setq org-refile-targets '((org-agenda-files :maxlevel . 2)))
+
+    ;; format string used when creating CLOCKSUM lines and when generating a
+    ;; time duration (avoid showing days)
+    (setq org-time-clocksum-format
+          '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
+
+    (setq org-startup-indented t)
+
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((ruby . t)
+       (shell . t)))
+    )
+
+  ;; END ORG CONFIG
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 
   (dolist (mode '(erc-mode
                   comint-mode
@@ -292,7 +322,13 @@ before layers configuration."
                             comint-hooks)
     (spacemacs/add-to-hooks (defun linus/no-scroll-margin ()
                               (setq-local scroll-margin 0))
-                            comint-hooks)) (blink-cursor-mode t)
+                            comint-hooks))
+
+  (setq evil-move-beyond-eol nil)
+  (setq powerline-default-separator 'slant)
+  (global-linum-mode)
+  (linum-relative-toggle)
+  (blink-cursor-mode t)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will

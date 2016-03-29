@@ -329,6 +329,9 @@ before layers configuration."
   (global-linum-mode)
   (linum-relative-toggle)
   (blink-cursor-mode t)
+
+  (spacemacs|diminish alchemist-mode "Ⓐ" "A")
+  (spacemacs|diminish alchemist-phoenix-mode "Ⓠ" "Q")
 )
 
 ;; Do not write anything past this comment. This is where Emacs will

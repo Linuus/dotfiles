@@ -24,6 +24,7 @@
      erlang
      git
      latex
+     osx
      dash
      html
      markdown
@@ -77,13 +78,7 @@ before layers configuration."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(base16-ocean-dark
-                         solarized-light
-                         solarized-dark
-                         spacemacs-light
-                         spacemacs-dark
-                         leuven
-                         monokai
-                         zenburn)
+                         leuven)
    ;; If non nil the cursor color matches the state color.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
@@ -286,6 +281,11 @@ before layers configuration."
   (with-eval-after-load 'org
     (setq org-agenda-files (quote ("~/Dropbox (Personal)/Notes/personal.org"
                                    "~/Dropbox (Personal)/Notes/work.org")))
+
+    ;; don't show tasks that are scheduled or have deadlines in the
+    ;; global todo list
+    (setq org-agenda-todo-ignore-deadlines (quote all))
+    (setq org-agenda-todo-ignore-scheduled (quote all))
 
     (setq org-refile-targets '((org-agenda-files :maxlevel . 2)))
 

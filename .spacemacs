@@ -7,7 +7,7 @@
   (setq-default
    ;; List of additional paths where to look for configuration layers.
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
-   dotspacemacs-configuration-layer-path '()
+   dotspacemacs-configuration-layer-path '("~/dotfiles/spacemacs-layers")
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
@@ -39,6 +39,7 @@
      syntax-checking
      version-control
      themes-megapack
+     org-page
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -279,6 +280,11 @@ before layers configuration."
   ;; ORG CONFIG
 
   (with-eval-after-load 'org
+    (setq org-startup-indented t)
+    (setq org-clock-modeline-total 'today)
+
+    (spacemacs/toggle-mode-line-org-clock-on)
+
     (setq org-agenda-files (quote ("~/Dropbox (Personal)/Notes/personal.org"
                                    "~/Dropbox (Personal)/Notes/work.org")))
 
@@ -294,13 +300,23 @@ before layers configuration."
     (setq org-time-clocksum-format
           '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
 
-    (setq org-startup-indented t)
 
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((ruby . t)
        (shell . t)))
     )
+
+  (setq org-agenda-custom-commands
+        '(("p" "Personal stuff" tags-todo "CATEGORY=\"PERSONAL\"")
+          ("w" "Work related" ((agenda "")
+                               (tags-todo "CATEGORY=\"WORK\"")))
+          ("n" "Agenda and all TODOs" ((agenda "") (alltodo "")))
+          ))
+
+  (setq org-capture-templates
+        '(("r" "To read" entry (file+headline "~/Dropbox (Personal)/Notes/personal.org" "Reading list")
+           "* %?\n  %i")))
 
   ;; END ORG CONFIG
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

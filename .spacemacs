@@ -20,6 +20,11 @@
      auto-completion
      emacs-lisp
      elixir
+     (elfeed :variables
+             elfeed-feeds '(("http://sachachua.com/blog/category/emacs/feed/" emacs)
+                            ("http://learningelixir.joekain.com/full-feed.xml" elixir)
+                            ("http://blog.plataformatec.com.br/feed/" elixir)
+                            ("http://planet.emacsen.org/atom.xml" emacs)))
      erc
      erlang
      git
@@ -171,24 +176,6 @@ before layers configuration."
   (spacemacs|use-package-add-hook erc
     :post-config
     (progn
-      ;; (defun erc-slack-connect ()
-      ;;   "Quick connect to hrx slack."
-      ;;   (interactive)
-      ;;   (erc-ssl :server "hackreactorx.irc.slack.com"
-      ;;            :port 6697
-      ;;            :nick "mccloud.christopher"
-      ;;            :password user-slack-irc-password))
-
-      ;; (defun erc-gitter-connect ()
-      ;;   "Quick connect to irc.gitter.im"
-      ;;   (interactive)
-      ;;   ;; clean up old buffers if they exist
-      ;;   (dolist (buf '("irc.gitter.im:6667" "#syl20bnr/spacemacs"))
-      ;;     (when (get-buffer buf) (kill-buffer buf)))
-      ;;   (erc-ssl :server "irc.gitter.im"
-      ;;            :port 6667
-      ;;            :nick "cmccloud"
-      ;;            :password user-gitter-irc-password))
 
       (defun erc-freenode-connect ()
         "Quick connect to irc.freenode.net"
@@ -202,8 +189,6 @@ before layers configuration."
 
       (evil-leader/set-key
         "aif" 'erc-freenode-connect)
-        ;; "aig" 'erc-gitter-connect
-        ;; "ais" 'erc-slack-connect)
 
       ;; if imagemagick isn't supported, we don't want inline images
       (unless (fboundp 'imagemagick-types)

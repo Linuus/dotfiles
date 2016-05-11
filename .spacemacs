@@ -28,6 +28,7 @@
      erc
      erlang
      git
+     javascript
      latex
      osx
      dash

@@ -14,3 +14,5 @@
   ui = true
 [core]
 	excludesfile = /Users/linus/.gitignore
+[commit]
+	gpgsign = true

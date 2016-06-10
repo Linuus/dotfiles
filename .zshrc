@@ -28,3 +28,6 @@ export PATH=".git/safe/../../bin:$PATH"
 
 # Vim mode stuff
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# added by travis gem
+[ -f /Users/linus/.travis/travis.sh ] && source /Users/linus/.travis/travis.sh

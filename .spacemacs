@@ -28,6 +28,7 @@
      erlang
      finance
      git
+     javascript
      latex
      osx
      dash
@@ -77,8 +78,6 @@ before layers configuration."
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed.
    dotspacemacs-startup-banner nil
-   ;; List of items to show in the startup buffer. If nil it is disabled.
-   ;; Possible values are: `recents' `bookmarks' `projects'."
    ;; List of items to show in startup buffer or an association list of
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
    ;; Possible values for list-type are:

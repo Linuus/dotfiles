@@ -14,3 +14,4 @@
   ui = true
 [core]
 	excludesfile = /Users/linus/.gitignore
+[commit]

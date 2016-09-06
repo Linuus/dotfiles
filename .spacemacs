@@ -23,10 +23,10 @@
      (elfeed :variables
              elfeed-feeds '(("http://sachachua.com/blog/category/emacs/feed/" emacs)
                             ("http://learningelixir.joekain.com/full-feed.xml" elixir)
-                            ("http://blog.plataformatec.com.br/feed/" elixir)
                             ("http://planet.emacsen.org/atom.xml" emacs)))
      erc
      erlang
+     finance
      git
      latex
      osx
@@ -79,7 +79,12 @@ before layers configuration."
    dotspacemacs-startup-banner nil
    ;; List of items to show in the startup buffer. If nil it is disabled.
    ;; Possible values are: `recents' `bookmarks' `projects'."
-   dotspacemacs-startup-lists '(recents projects)
+   ;; List of items to show in startup buffer or an association list of
+   ;; the form `(list-type . list-size)`. If nil then it is disabled.
+   ;; Possible values for list-type are:
+   ;; `recents' `bookmarks' `projects' `agenda' `todos'."
+   dotspacemacs-startup-lists '((recents . 10)
+                                (projects . 10))
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)

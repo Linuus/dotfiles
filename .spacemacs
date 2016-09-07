@@ -23,10 +23,10 @@
      (elfeed :variables
              elfeed-feeds '(("http://sachachua.com/blog/category/emacs/feed/" emacs)
                             ("http://learningelixir.joekain.com/full-feed.xml" elixir)
-                            ("http://blog.plataformatec.com.br/feed/" elixir)
                             ("http://planet.emacsen.org/atom.xml" emacs)))
      erc
      erlang
+     finance
      git
      javascript
      latex
@@ -78,17 +78,17 @@ before layers configuration."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed.
-   dotspacemacs-startup-banner nil
+   dotspacemacs-startup-banner 'official
    ;; List of items to show in startup buffer or an association list of
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
    ;; Possible values for list-type are:
    ;; `recents' `bookmarks' `projects' `agenda' `todos'."
-   dotspacemacs-startup-lists '((recents . 5)
-                                (projects . 7))
+   dotspacemacs-startup-lists '((recents . 10)
+                                (projects . 10))
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(base16-ocean-dark
+   dotspacemacs-themes '(base16-ocean
                          leuven)
    ;; If non nil the cursor color matches the state color.
    dotspacemacs-colorize-cursor-according-to-state t

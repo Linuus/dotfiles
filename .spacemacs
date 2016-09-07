@@ -31,6 +31,7 @@
      javascript
      latex
      osx
+     restclient
      dash
      html
      markdown
@@ -270,7 +271,7 @@ before layers configuration."
 
   (with-eval-after-load 'org
     (setq org-startup-indented t)
-    (setq org-clock-modeline-total 'today)
+    (setq org-clock-mode-line-total 'today)
 
     (spacemacs/toggle-mode-line-org-clock-on)
 

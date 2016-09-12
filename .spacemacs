@@ -219,6 +219,8 @@ before layers configuration."
 
       (add-hook 'erc-mode-hook 'turn-off-show-smartparens-mode)))
 
+      (setq erc-image-inline-rescale 400)
+
   ;; END ERC CONFIG
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   )

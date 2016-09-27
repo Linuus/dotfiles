@@ -24,7 +24,13 @@
              elfeed-feeds '(("http://sachachua.com/blog/category/emacs/feed/" emacs)
                             ("http://learningelixir.joekain.com/full-feed.xml" elixir)
                             ("http://planet.emacsen.org/atom.xml" emacs)))
-     erc
+     (erc :variables
+          erc-server-list
+          '(("irc.freenode.net"
+             :port "6697"
+             :ssl t
+             :nick "Linuus")
+            ))
      erlang
      finance
      git
@@ -182,25 +188,12 @@ before layers configuration."
     :post-config
     (progn
 
-      (defun erc-freenode-connect ()
-        "Quick connect to irc.freenode.net"
-        (interactive)
-        ;; clean up old buffers if they exist
-        (dolist (buf '("irc.freenode.net:6667" "#elixir-lang" "#qutebrowser"))
-          (when (get-buffer buf) (kill-buffer buf)))
-        (erc :server "irc.freenode.net"
-             :port 6667
-             :nick "Linuus"))
-
-      (evil-leader/set-key
-        "aif" 'erc-freenode-connect)
-
       ;; if imagemagick isn't supported, we don't want inline images
       (unless (fboundp 'imagemagick-types)
         (setq erc-modules (-remove-item 'image erc-modules)))
 
       (setq erc-autojoin-channels-alist
-            '(("freenode.net" "#elixir-lang" "#qutebrowser"))
+            '(("freenode.net" "#elixir-lang" "#qutebrowser" "#rubyonrails"))
             erc-hide-list '("JOIN" "PART" "QUIT" "NICK" "MODE" "353")
             erc-track-exclude-types '("JOIN" "PART" "QUIT" "NICK" "MODE" "353")
             erc-track-exclude-server-buffer t
@@ -214,9 +207,6 @@ before layers configuration."
             erc-current-nick-highlight-type 'all
             erc-log-insert-log-on-open nil
             erc-track-shorten-aggressively 'max)
-            ;; erc-prompt-for-nickserv-password nil
-            ;; erc-enable-sasl-auth t
-            ;; erc-sasl-server-regexp-list '("irc\\.freenode\\.net"))
 
       (add-hook 'erc-mode-hook 'turn-off-show-smartparens-mode)))
 

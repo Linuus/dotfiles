@@ -26,6 +26,9 @@ export PATH="/usr/local/heroku/bin:$PATH"
 # Run mkdir .git/safe in trusted projects
 export PATH=".git/safe/../../bin:$PATH"
 
+export NVM_DIR="$HOME/.nvm"
+. "$(brew --prefix nvm)/nvm.sh"
+
 # Vim mode stuff
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

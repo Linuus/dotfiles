@@ -27,7 +27,7 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export PATH=".git/safe/../../bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
-. "$(brew --prefix nvm)/nvm.sh"
+[ -f $(brew --prefix nvm)/nvm.sh ] && . "$(brew --prefix nvm)/nvm.sh"
 
 # Vim mode stuff
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

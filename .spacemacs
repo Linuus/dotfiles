@@ -74,7 +74,9 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(
+                                      harvest
+                                      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -456,6 +458,14 @@ you should place your code here."
 
   ;; END ORG CONFIG
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  (use-package harvest
+    :demand t
+    :ensure t
+    :config
+    ;; (evil-leader/set-key "oh" 'harvest)
+    (add-hook 'org-clock-in-hook 'harvest)
+    (add-hook 'org-clock-out-hook 'harvest-clock-out))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

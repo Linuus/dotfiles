@@ -36,7 +36,6 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      auto-completion
-     csv
      dash
      elixir
      emacs-lisp
@@ -327,6 +326,8 @@ you should place your code here."
 
   (setq custom-file "~/.emacs.d/.cache/custom.el")
   (load custom-file)
+
+  (setq projectile-enable-caching t)
 
   (defmacro linus/remove-from-list (list-var element)
     `(setq ,list-var (remove ,element ,list-var)))

@@ -7,7 +7,7 @@ export PATH=$PATH:/Library/TeX/texbin
 
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
 
-eval "$(rbenv init -)"
+eval "$(rbenv init - --no-rehash)"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
@@ -17,9 +17,6 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export PATH=".git/safe/../../bin:$PATH"
 
 export EDITOR='vim'
-
-export NVM_DIR="$HOME/.nvm"
-[ -f $(brew --prefix nvm)/nvm.sh ] && . "$(brew --prefix nvm)/nvm.sh"
 
 # Vim mode stuff
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

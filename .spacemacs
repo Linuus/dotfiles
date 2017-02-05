@@ -427,6 +427,13 @@ you should place your code here."
     (setq org-agenda-files (quote ("~/Dropbox (Personal)/Notes/personal.org"
                                    "~/Dropbox (Personal)/Notes/work.org")))
 
+    ;; Set to the location of your Org files on your local system
+    (setq org-directory "~/Dropbox (Personal)/Notes")
+    ;; Set to the name of the file where new notes will be stored
+    (setq org-mobile-inbox-for-pull "~/Dropbox (Personal)/Notes/inbox.org")
+    ;; Set to <your Dropbox root directory>/MobileOrg.
+    (setq org-mobile-directory "~/Dropbox (Personal)/Apps/MobileOrg")
+
     ;; don't show tasks that are scheduled or have deadlines in the
     ;; global todo list
     (setq org-agenda-todo-ignore-deadlines (quote all))

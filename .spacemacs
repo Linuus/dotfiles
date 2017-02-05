@@ -46,7 +46,7 @@ values."
      html
      javascript
      latex
-     markdown
+     (markdown :variables markdown-live-preview-engine 'vmd)
      org
      org-page
      osx

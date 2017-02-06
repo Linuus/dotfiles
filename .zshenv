@@ -7,7 +7,9 @@ export PATH=$PATH:/Library/TeX/texbin
 
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
 
-eval "$(rbenv init - --no-rehash)"
+if command -v rbenv >/dev/null 2>&1; then
+  eval "$(rbenv init - --no-rehash)"
+fi
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"

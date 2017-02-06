@@ -1,4 +1,5 @@
 KEYTIMEOUT=1
+bindkey -e
 
 bindkey '\ew' kill-region
 
@@ -15,5 +16,7 @@ bindkey ' ' magic-space
 
 bindkey '^F' forward-word
 bindkey '^B' backward-word
+bindkey '\e\e[C' forward-word
+bindkey '\e\e[D' backward-word
 
 bindkey '^[[Z' reverse-menu-complete

@@ -1,15 +1,11 @@
-export ZPLUG_HOME=/usr/local/opt/zplug
-source $ZPLUG_HOME/init.zsh
 source ~/dotfiles/zsh/aliases.zsh
 source ~/dotfiles/zsh/keys.zsh
 source ~/dotfiles/zsh/history.zsh
-source $HOME/.asdf/asdf.sh
 source $HOME/.asdf/completions/asdf.bash
 
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "mafredri/zsh-async", from:github
 zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
-
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -24,5 +20,3 @@ zplug load
 
 unsetopt correct
 unsetopt auto_cd
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -23,5 +23,3 @@ export EDITOR="vim"
 
 # added by travis gem
 [ -f /Users/linus/.travis/travis.sh ] && source /Users/linus/.travis/travis.sh
-
-source $HOME/.asdf/asdf.sh

@@ -1,6 +1,7 @@
 source ~/dotfiles/zsh/aliases.zsh
 source ~/dotfiles/zsh/keys.zsh
 source ~/dotfiles/zsh/history.zsh
+source $HOME/.asdf/asdf.sh
 source $HOME/.asdf/completions/asdf.bash
 
 zplug "zsh-users/zsh-syntax-highlighting", defer:2

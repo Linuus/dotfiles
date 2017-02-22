@@ -67,6 +67,7 @@ values."
             ))
      (shell :variables
             shell-default-shell 'eshell
+            shell-default-term-shell "/usr/local/bin/zsh"
             shell-default-height 30
             shell-default-position 'bottom)
      )

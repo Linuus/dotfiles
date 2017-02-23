@@ -53,6 +53,7 @@ values."
      restclient
      ruby
      ruby-on-rails
+     rust
      syntax-checking
      themes-megapack
      version-control

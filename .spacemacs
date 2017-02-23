@@ -46,6 +46,7 @@ values."
      html
      javascript
      latex
+     lua
      (markdown :variables markdown-live-preview-engine 'vmd)
      org
      org-page

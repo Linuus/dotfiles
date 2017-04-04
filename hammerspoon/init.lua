@@ -29,6 +29,32 @@ hs.hotkey.bind({"cmd", "alt"}, "Right", function()
     win:setFrame(f)
 end)
 
+hs.hotkey.bind({"cmd", "alt"}, "Up", function()
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen()
+    local max = screen:frame()
+
+    f.x = max.x
+    f.y = max.y
+    f.w = max.w
+    f.h = max.h / 2
+    win:setFrame(f)
+end)
+
+hs.hotkey.bind({"cmd", "alt"}, "Down", function()
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen()
+    local max = screen:frame()
+
+    f.x = max.x
+    f.y = max.y + (max.h / 2)
+    f.w = max.w
+    f.h = max.h / 2
+    win:setFrame(f)
+end)
+
 hs.hotkey.bind({"cmd", "alt"}, "f", function()
     local win = hs.window.focusedWindow()
     local f = win:frame()

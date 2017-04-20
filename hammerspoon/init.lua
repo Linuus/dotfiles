@@ -83,6 +83,10 @@ end
 other_tap = hs.eventtap.new({hs.eventtap.event.types.keyDown}, other_handler)
 other_tap:start()
 
+-- defeat paste block
+
+hs.hotkey.bind({"cmd", "alt"}, "V", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
+
 -- simulate flux
 
 -- hs.location.start()

@@ -439,9 +439,7 @@ you should place your code here."
   (setq web-mode-code-indent-offset 2) ; web-mode, js code in html file
   (setq css-indent-offset 2) ; css-mode
 
-  (setq-default
-   ruby-version-manager 'rbenv
-   ruby-insert-encoding-magic-comment nil)
+  (setq-default ruby-insert-encoding-magic-comment nil)
 
   (add-hook 'web-mode-hook
             (function (lambda ()

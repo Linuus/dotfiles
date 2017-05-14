@@ -18,8 +18,10 @@ export PATH=".git/safe/../../bin:$PATH"
 
 export EDITOR="vim"
 
-# Vim mode stuff
+# Source fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # added by travis gem
 [ -f /Users/linus/.travis/travis.sh ] && source /Users/linus/.travis/travis.sh
+
+[ -f $HOME/.asdf/asdf.sh ] && source $HOME/.asdf/asdf.sh

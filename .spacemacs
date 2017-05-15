@@ -40,7 +40,8 @@ values."
      elixir
      emacs-lisp
      erlang
-     (elfeed :variables rmh-elfeed-org-files (list "~/Dropbox (Personal)/Notes/elfeed.org"))
+     (elfeed :variables
+             rmh-elfeed-org-files (list "~/Dropbox (Personal)/Notes/elfeed.org"))
      git
      ivy
      html
@@ -331,8 +332,6 @@ you should place your code here."
   (setq custom-file "~/.emacs.d/.cache/custom.el")
   (load custom-file)
 
-  ;; (setq projectile-enable-caching t)
-
   (defmacro linus/remove-from-list (list-var element)
     `(setq ,list-var (remove ,element ,list-var)))
 
@@ -348,6 +347,40 @@ you should place your code here."
 
   (spacemacs|diminish alchemist-mode "Ⓐ" "A")
   (spacemacs|diminish alchemist-phoenix-mode "Ⓠ" "Q")
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; ELFEED CONFIG
+
+  (setq elfeed-db-directory "~/Dropbox (Personal)/emacs/elfeeddb")
+
+  ;;functions to support syncing .elfeed between machines
+  ;;makes sure elfeed reads index from disk before launching
+  (defun bjm/elfeed-load-db-and-open ()
+    "Wrapper to load the elfeed db from disk before opening"
+    (interactive)
+    (elfeed-db-load)
+    (elfeed)
+    (elfeed-search-update--force))
+
+  ;;write to disk when quiting
+  (defun bjm/elfeed-save-db-and-bury ()
+    "Wrapper to save the elfeed db to disk before burying buffer"
+    (interactive)
+    (elfeed-db-save)
+    (quit-window))
+
+
+  (with-eval-after-load 'elfeed
+    (defalias 'elfeed-toggle-star
+      (elfeed-expose #'elfeed-search-toggle-all 'star))
+
+    (evil-define-key 'evilified elfeed-search-mode-map (kbd "q") 'bjm/elfeed-save-db-and-bury)
+    (evil-define-key 'evilified elfeed-search-mode-map (kbd "Q") 'bjm/elfeed-save-db-and-bury)
+    (evil-define-key 'evilified elfeed-search-mode-map (kbd "m") 'elfeed-toggle-star)
+    (evil-define-key 'evilified elfeed-search-mode-map (kbd "M") 'elfeed-toggle-star))
+
+  ;; END ELFEED CONFIG
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; ERC CONFIG

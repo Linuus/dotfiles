@@ -52,6 +52,7 @@ values."
      org
      org-page
      osx
+     react
      restclient
      ruby
      ruby-on-rails

@@ -12,10 +12,6 @@ fi
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-# Use binstubs in safe projects
-# Run mkdir .git/safe in trusted projects
-export PATH=".git/safe/../../bin:$PATH"
-
 export EDITOR="vim"
 
 # Source fzf
@@ -25,3 +21,7 @@ export EDITOR="vim"
 [ -f /Users/linus/.travis/travis.sh ] && source /Users/linus/.travis/travis.sh
 
 [ -f $HOME/.asdf/asdf.sh ] && source $HOME/.asdf/asdf.sh
+
+# Use binstubs in safe projects
+# Run mkdir .git/safe in trusted projects
+export PATH=".git/safe/../../bin:$PATH"

@@ -463,6 +463,7 @@ you should place your code here."
   (with-eval-after-load 'org
     (setq org-startup-indented t)
     (setq org-clock-mode-line-total 'today)
+    (setq org-clock-report-include-clocking-task t)
 
     (spacemacs/toggle-mode-line-org-clock-on)
 

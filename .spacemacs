@@ -484,6 +484,11 @@ you should place your code here."
 
     (setq org-refile-targets '((org-agenda-files :maxlevel . 2)))
 
+    (setq org-todo-keyword-faces
+          '(
+            ("IN-PROGRESS" . (:foreground "goldenrod" :weight bold))
+            ))
+
     ;; format string used when creating CLOCKSUM lines and when generating a
     ;; time duration (avoid showing days)
     (setq org-time-clocksum-format

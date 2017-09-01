@@ -52,6 +52,7 @@ values."
      org
      org-page
      osx
+     react
      restclient
      ruby
      ruby-on-rails
@@ -462,6 +463,7 @@ you should place your code here."
   (with-eval-after-load 'org
     (setq org-startup-indented t)
     (setq org-clock-mode-line-total 'today)
+    (setq org-clock-report-include-clocking-task t)
 
     (spacemacs/toggle-mode-line-org-clock-on)
 
@@ -481,6 +483,11 @@ you should place your code here."
     (setq org-agenda-todo-ignore-scheduled (quote all))
 
     (setq org-refile-targets '((org-agenda-files :maxlevel . 2)))
+
+    (setq org-todo-keyword-faces
+          '(
+            ("IN-PROGRESS" . (:foreground "goldenrod" :weight bold))
+            ))
 
     ;; format string used when creating CLOCKSUM lines and when generating a
     ;; time duration (avoid showing days)

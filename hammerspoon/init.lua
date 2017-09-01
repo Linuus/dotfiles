@@ -113,6 +113,20 @@ end)
 
 hs.hotkey.bind({"cmd", "alt"}, "V", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
 
+-- volume
+
+hs.hotkey.bind({"cmd", "alt"}, "]", function() hs.audiodevice.defaultOutputDevice():setVolume(hs.audiodevice.current().volume + 5) end)
+hs.hotkey.bind({"cmd", "alt"}, "[", function() hs.audiodevice.defaultOutputDevice():setVolume(hs.audiodevice.current().volume - 5) end)
+
+-- spotify
+
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, 'space', hs.spotify.displayCurrentTrack)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, 'p',     hs.spotify.play)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, 'o',     hs.spotify.pause)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, 'n',     hs.spotify.next)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, 'i',     hs.spotify.previous)
+
+
 -- simulate flux
 
 -- hs.location.start()

@@ -377,6 +377,8 @@ you should place your code here."
   (setq custom-file "~/.emacs.d/.cache/custom.el")
   (load custom-file)
 
+  (setq wgrep-auto-save-buffer t)
+
   (defmacro linus/remove-from-list (list-var element)
     `(setq ,list-var (remove ,element ,list-var)))
 

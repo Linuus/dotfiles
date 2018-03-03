@@ -5,10 +5,6 @@ export PATH=/usr/local/git/bin:/usr/local/bin:/usr/bin:/bin:~/bin:/usr/sbin:/usr
 
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
 
-if command -v rbenv >/dev/null 2>&1; then
-  eval "$(rbenv init - --no-rehash)"
-fi
-
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 

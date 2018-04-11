@@ -21,3 +21,6 @@ export EDITOR="vim"
 # Use binstubs in safe projects
 # Run mkdir .git/safe in trusted projects
 export PATH=".git/safe/../../bin:$PATH"
+
+export LC_ALL=en_us.UTF-8
+export LANG=en_us.UTF-8

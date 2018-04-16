@@ -147,7 +147,8 @@ It should only modify the values of Spacemacs settings."
    ;; `recents' `bookmarks' `projects' `agenda' `todos'.
    ;; List sizes may be nil, in which case
    ;; `spacemacs-buffer-startup-lists-length' takes effect.
-   dotspacemacs-startup-lists '((recents . 10)
+   dotspacemacs-startup-lists '((agenda)
+                                (todos)
                                 (projects . 10))
    ;; True if the home buffer should respond to resize events.
    dotspacemacs-startup-buffer-responsive t
@@ -398,6 +399,8 @@ you should place your code here."
   (spacemacs|diminish alchemist-mode "Ⓐ" "A")
   (spacemacs|diminish alchemist-phoenix-mode "Ⓠ" "Q")
 
+  (add-hook 'prog-mode-hook 'spacemacs/toggle-truncate-lines-on)
+
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; ELFEED CONFIG
 
@@ -505,6 +508,7 @@ you should place your code here."
 
   (with-eval-after-load 'org
     (setq org-startup-indented t)
+    (setq org-log-into-drawer t)
     (setq org-clock-mode-line-total 'today)
     (setq org-clock-report-include-clocking-task t)
 

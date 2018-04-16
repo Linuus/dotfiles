@@ -1,6 +1,7 @@
 [user]
   name = Linus Marton
   email = linus.pettersson@gmail.com
+  signingkey = 3AE26AD3E41F5ED8
 [push]
   default = simple
 [init]

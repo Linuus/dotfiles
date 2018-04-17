@@ -1446,6 +1446,8 @@ c.tabs.padding = {'top': 2, 'bottom': 2, 'left': 5, 'right': 5}
 # config.bind('yy', 'yank')
 # config.bind('{{', 'navigate prev -t')
 # config.bind('}}', 'navigate next -t')
+config.bind(',v', 'spawn mpv {url}')
+config.bind(',j', 'spawn --userscript /Users/linus/dotfiles/qutebrowser/json_format')
 
 ## Bindings for caret mode
 # config.bind('$', 'move-to-end-of-line', mode='caret')

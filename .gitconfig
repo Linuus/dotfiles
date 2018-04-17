@@ -17,3 +17,5 @@
   excludesfile = /Users/linus/.gitignore
 [commit]
   gpgsign = true
+[github]
+  user = linuus

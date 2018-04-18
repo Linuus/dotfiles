@@ -1,3 +1,5 @@
+setopt no_global_rcs # Make macOS stop fucking with the PATH!
+
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 

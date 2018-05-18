@@ -12,6 +12,8 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 export EDITOR="vim"
 
+export DISABLE_SPRING=true
+
 # Source fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

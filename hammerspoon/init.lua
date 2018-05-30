@@ -81,7 +81,7 @@ end)
 
 -- defeat paste block
 
-hs.hotkey.bind({"cmd", "alt"}, "V", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
+hs.hotkey.bind({"cmd", "alt"}, "v", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
 
 -- volume
 
@@ -90,8 +90,7 @@ hs.hotkey.bind({"cmd", "alt"}, "[", function() hs.audiodevice.defaultOutputDevic
 
 -- spotify
 
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, 'space', hs.spotify.displayCurrentTrack)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, 'p',     hs.spotify.play)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, 'o',     hs.spotify.pause)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, 'n',     hs.spotify.next)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, 'i',     hs.spotify.previous)
+hs.hotkey.bind({"cmd", "alt"}, 'c', hs.spotify.displayCurrentTrack)
+hs.hotkey.bind({"cmd", "alt"}, 'p', hs.spotify.playpause)
+hs.hotkey.bind({"cmd", "alt"}, '.', hs.spotify.next)
+hs.hotkey.bind({"cmd", "alt"}, ',', hs.spotify.previous)

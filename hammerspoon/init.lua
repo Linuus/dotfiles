@@ -1,82 +1,34 @@
+local hyper = {"cmd", "alt"}
+local launcher = {"cmd", "ctrl"}
+hs.window.animationDuration = 0
+
+hs.loadSpoon("SpoonInstall")
+
+spoon.SpoonInstall:andUse("MiroWindowsManager", {
+                             hotkeys =
+                                {
+                                   up = {hyper, "k"},
+                                   right = {hyper, "l"},
+                                   down = {hyper, "j"},
+                                   left = {hyper, "h"},
+                                   fullscreen = {hyper, "f"}
+                                }
+})
+
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "R", function()
     hs.reload()
 end)
 hs.alert.show("Config loaded")
 
-hs.hotkey.bind({"cmd", "ctrl"}, "Return", function()
+hs.hotkey.bind(launcher, "Return", function()
   hs.execute("open -n -a emacs", true)
 end)
 
-hs.hotkey.bind({"cmd", "ctrl"}, "b", function()
+hs.hotkey.bind(launcher, "b", function()
   hs.execute("open -a qutebrowser", true)
 end)
-hs.hotkey.bind({"cmd", "ctrl", "shift"}, "b", function()
+hs.hotkey.bind(launcher, "b", function()
   hs.execute("open -n -a qutebrowser", true)
-end)
-
-hs.hotkey.bind({"cmd", "alt"}, "h", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
-
-  f.x = max.x
-  f.y = max.y
-  f.w = max.w / 2
-  f.h = max.h
-  win:setFrame(f, 0)
-end)
-
-hs.hotkey.bind({"cmd", "alt"}, "l", function()
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-    local screen = win:screen()
-    local max = screen:frame()
-
-    f.x = max.x + (max.w / 2)
-    f.y = max.y
-    f.w = max.w / 2
-    f.h = max.h
-    win:setFrame(f, 0)
-end)
-
-hs.hotkey.bind({"cmd", "alt"}, "k", function()
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-    local screen = win:screen()
-    local max = screen:frame()
-
-    f.x = max.x
-    f.y = max.y
-    f.w = max.w
-    f.h = max.h / 2
-    win:setFrame(f, 0)
-end)
-
-hs.hotkey.bind({"cmd", "alt"}, "j", function()
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-    local screen = win:screen()
-    local max = screen:frame()
-
-    f.x = max.x
-    f.y = max.y + (max.h / 2)
-    f.w = max.w
-    f.h = max.h / 2
-    win:setFrame(f, 0)
-end)
-
-hs.hotkey.bind({"cmd", "alt"}, "f", function()
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-    local screen = win:screen()
-    local max = screen:frame()
-
-    f.x = max.x
-    f.y = max.y
-    f.w = max.w
-    f.h = max.h
-    win:setFrame(f, 0)
 end)
 
 -- window switcher
@@ -98,17 +50,14 @@ hs.hotkey.bind("alt","tab",function()switcher:next()end)
 hs.hotkey.bind("alt-shift","tab",function()switcher:previous()end)
 
 -- defeat paste block
-
-hs.hotkey.bind({"cmd", "alt"}, "v", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
+hs.hotkey.bind(hyper, "v", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
 
 -- volume
-
-hs.hotkey.bind({"cmd", "alt"}, "]", function() hs.audiodevice.defaultOutputDevice():setVolume(hs.audiodevice.current().volume + 5) end)
-hs.hotkey.bind({"cmd", "alt"}, "[", function() hs.audiodevice.defaultOutputDevice():setVolume(hs.audiodevice.current().volume - 5) end)
+hs.hotkey.bind(hyper, "]", function() hs.audiodevice.defaultOutputDevice():setVolume(hs.audiodevice.current().volume + 5) end)
+hs.hotkey.bind(hyper, "[", function() hs.audiodevice.defaultOutputDevice():setVolume(hs.audiodevice.current().volume - 5) end)
 
 -- spotify
-
-hs.hotkey.bind({"cmd", "alt"}, 'c', hs.spotify.displayCurrentTrack)
-hs.hotkey.bind({"cmd", "alt"}, 'p', hs.spotify.playpause)
-hs.hotkey.bind({"cmd", "alt"}, '.', hs.spotify.next)
-hs.hotkey.bind({"cmd", "alt"}, ',', hs.spotify.previous)
+hs.hotkey.bind(hyper, "c", hs.spotify.displayCurrentTrack)
+hs.hotkey.bind(hyper, "p", hs.spotify.playpause)
+hs.hotkey.bind(hyper, ".", hs.spotify.next)
+hs.hotkey.bind(hyper, ",", hs.spotify.previous)

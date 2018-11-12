@@ -3,7 +3,7 @@ setopt no_global_rcs # Make macOS stop fucking with the PATH!
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
-export PATH=/usr/local/git/bin:/usr/local/bin:/usr/bin:/bin:~/bin:/usr/sbin:/usr/local/sbin:/sbin:/usr/X11/bin:/usr/local:/usr/local/CrossPack-AVR/bin:/Applications/Postgres.app/Contents/Versions/9.6/bin:/Library/TeX/texbin
+export PATH=/usr/local/git/bin:/usr/local/bin:/usr/bin:/bin:~/bin:/usr/sbin:/usr/local/sbin:/sbin:/usr/X11/bin:/usr/local:/usr/local/CrossPack-AVR/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:/Library/TeX/texbin
 
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
 

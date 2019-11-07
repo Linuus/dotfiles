@@ -1,6 +1,4 @@
-local hyper = {"cmd", "alt"}
-local launcher = {"cmd", "ctrl"}
-local launcher_2 = {"cmd", "ctrl", "shift"}
+local hyper = {"ctrl", "alt", "cmd"}
 hs.window.animationDuration = 0
 
 hs.loadSpoon("SpoonInstall")
@@ -21,28 +19,11 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "R", function()
 end)
 hs.alert.show("Config loaded")
 
-hs.hotkey.bind(launcher, "e", function()
-   hs.osascript.applescript([[
-      on emacsRunning()
-         tell application "System Events" to (name of processes) contains "emacs"
-      end emacsRunning
-
-      on run argv
-
-      if (emacsRunning() = false) then
-         do shell script "open -a emacs " & (item 1 of argv)
-      else
-         tell application "emacs" to activate
-      end if
-      end run
-   ]])
-end)
-
-hs.hotkey.bind(launcher_2, "e", function()
+hs.hotkey.bind(hyper, "e", function()
   hs.execute("open -n -a emacs", true)
 end)
 
-hs.hotkey.bind(launcher, "f", function()
+hs.hotkey.bind(hyper, "b", function()
    hs.osascript.applescript([[
       on firefoxRunning()
          tell application "System Events" to (name of processes) contains "Firefox"
@@ -59,7 +40,7 @@ hs.hotkey.bind(launcher, "f", function()
    ]])
 end)
 
-hs.hotkey.bind(launcher, "b", function()
+hs.hotkey.bind(hyper, "q", function()
   hs.execute("open -a qutebrowser", true)
 end)
 
@@ -69,13 +50,13 @@ hs.hotkey.bind(hyper, "v", function() hs.eventtap.keyStrokes(hs.pasteboard.getCo
 -- volume
 hs.hotkey.bind(
    hyper,
-   "]",
+   "u",
    function()
       hs.audiodevice.defaultOutputDevice():setVolume(hs.audiodevice.current().volume + 5)
 end)
 hs.hotkey.bind(
    hyper,
-   "[",
+   "i",
    function()
       hs.audiodevice.defaultOutputDevice():setVolume(hs.audiodevice.current().volume - 5)
 end)

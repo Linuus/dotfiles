@@ -29,7 +29,7 @@ settings.theme = `
     color: #eceff4;
     box-shadow: 0px 2px 10px #3b4252;
 }
-.sk_theme #sk_omnibar #sk_omnibarSearchArea {
+.sk_theme#sk_omnibar #sk_omnibarSearchArea {
     border-bottom: 1px solid #434c5e;
 }
 .sk_theme #sk_omnibarSearchArea > input {

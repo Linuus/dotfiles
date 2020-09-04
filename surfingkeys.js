@@ -32,7 +32,7 @@ settings.theme = `
 .sk_theme#sk_omnibar #sk_omnibarSearchArea {
     border-bottom: 1px solid #434c5e;
 }
-.sk_theme #sk_omnibarSearchArea > input {
+.sk_theme #sk_omnibarSearchArea input {
     color: #eceff4;
 }
 .sk_theme #sk_omnibarSearchArea .prompt {
@@ -41,10 +41,10 @@ settings.theme = `
 .sk_theme .resultPage {
     color: #81a1c1;
 }
-.sk_theme #sk_omnibarSearchResult > ul > li:nth-child(2n+1) {
+.sk_theme #sk_omnibarSearchResult ul li:nth-child(2n+1) {
     background: #434c5e;
 }
-.sk_theme #sk_omnibarSearchResult > ul > li.focused {
+.sk_theme #sk_omnibarSearchResult ul li.focused {
     background: #4c566a;
 }
 .sk_theme .annotation {

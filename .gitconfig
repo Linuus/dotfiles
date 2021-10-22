@@ -20,3 +20,5 @@
   gpgsign = true
 [github]
   user = linuus
+[pull]
+	rebase = true

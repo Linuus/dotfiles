@@ -25,6 +25,7 @@ export DISABLE_SPRING=true
 # Use binstubs in safe projects
 # Run mkdir .git/safe in trusted projects
 export PATH=".git/safe/../../bin:$PATH"
+export PATH=$PATH:$HOME/.elixir-ls/release
 
 export LC_ALL=en_us.UTF-8
 export LANG=en_us.UTF-8

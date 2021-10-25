@@ -11,12 +11,19 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'folke/which-key.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'ahmedkhalf/project.nvim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
 
 call plug#end()
 
 let mapleader = " "
 
 lua << EOF
+require("lualine").setup {
+  options = { theme = "nord" }
+}
 require("which-key").setup {}
 require("project_nvim").setup {}
 
@@ -91,6 +98,8 @@ nnoremap <leader>fs :w<CR>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>pp <cmd>Telescope projects<cr>
 nnoremap <leader>pf <cmd>Telescope git_files<cr>
+noremap <C-l> :nohlsearch<CR>
+
 lua << EOF
 local actions = require('telescope.actions')
 require('telescope').load_extension('projects')

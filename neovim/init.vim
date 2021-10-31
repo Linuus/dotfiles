@@ -23,10 +23,12 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'onsails/lspkind-nvim'
+Plug 'vim-test/vim-test'
 
 call plug#end()
 
 let mapleader = " "
+let maplocalleader = ","
 
 lua << EOF
   require("lualine").setup {
@@ -167,6 +169,8 @@ set directory=~/.tmp
 
 set termguicolors
 
+filetype plugin on
+
 colorscheme nord
 
 imap fd <esc>
@@ -178,6 +182,8 @@ nnoremap <leader>pp <cmd>Telescope projects<cr>
 nnoremap <leader>pf <cmd>Telescope git_files<cr>
 nnoremap <leader>sp <cmd>Telescope live_grep<cr>
 noremap <C-l> :nohlsearch<CR>
+
+let test#strategy = "dispatch"
 
 lua << EOF
 local actions = require('telescope.actions')

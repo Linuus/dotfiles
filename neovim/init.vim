@@ -11,7 +11,8 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'folke/which-key.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'ahmedkhalf/project.nvim'
-Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-fugitive'
+Plug 'TimUntersberger/neogit'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-rails'
@@ -32,7 +33,11 @@ let mapleader = " "
 let maplocalleader = ","
 
 lua << EOF
-  require('gitsigns').setup()
+  local neogit = require("neogit")
+  neogit.setup {}
+  neogit.config.use_magit_keybindings()
+
+  require("gitsigns").setup()
   require("lualine").setup {
     options = { theme = "nord" }
   }

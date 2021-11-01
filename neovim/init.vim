@@ -24,6 +24,7 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'onsails/lspkind-nvim'
 Plug 'vim-test/vim-test'
+Plug 'lewis6991/gitsigns.nvim'
 
 call plug#end()
 
@@ -31,6 +32,7 @@ let mapleader = " "
 let maplocalleader = ","
 
 lua << EOF
+  require('gitsigns').setup()
   require("lualine").setup {
     options = { theme = "nord" }
   }

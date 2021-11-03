@@ -21,7 +21,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
+" Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'onsails/lspkind-nvim'
 Plug 'vim-test/vim-test'
@@ -33,11 +33,6 @@ let mapleader = " "
 let maplocalleader = ","
 
 lua << EOF
-  local neogit = require("neogit")
-  neogit.setup {}
-  neogit.config.use_magit_keybindings()
-
-  require("gitsigns").setup()
   require("lualine").setup {
     options = { theme = "nord" }
   }
@@ -163,11 +158,13 @@ set number
 set incsearch
 set ignorecase
 set smartcase
+set nowrap
 
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
+set scrolloff=8
 
 set undofile
 set undodir=~/.tmp
@@ -185,10 +182,15 @@ nnoremap <leader>bb :Telescope buffers<CR>
 nnoremap <leader>bd :bd<CR>
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>gg :Neogit<cr>
+nnoremap <leader>gt :Telescope git_bcommits<cr>
 nnoremap <leader>pp <cmd>Telescope projects<cr>
 nnoremap <leader>pf <cmd>Telescope git_files<cr>
 nnoremap <leader>sp <cmd>Telescope live_grep<cr>
+nnoremap <leader>ss <cmd>Telescope current_buffer_fuzzy_find<cr>
 noremap <C-l> :nohlsearch<CR>
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 
 let test#strategy = "dispatch"
 

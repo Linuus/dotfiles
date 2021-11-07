@@ -34,10 +34,12 @@ let mapleader = " "
 let maplocalleader = ","
 
 lua << EOF
-  require("gitsigns").setup()
-  require("project_nvim").setup {}
-  require("which-key").setup {}
+require("gitsigns").setup {}
+require("project_nvim").setup {}
+require("which-key").setup {}
 EOF
+
+let test#strategy = "dispatch"
 
 set clipboard=unnamedplus
 set completeopt=menu,menuone,noselect
@@ -84,5 +86,3 @@ nnoremap <leader>ss <cmd>Telescope current_buffer_fuzzy_find<cr>
 noremap <C-l> :nohlsearch<CR>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
-
-let test#strategy = "dispatch"
